@@ -9,6 +9,8 @@ import {
   NativeStackScreenProps,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
+import CustomButton from 'component/ui/CustomButton';
+// import CustomButton from 'component/ui/CustomButton';
 import React from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
 
@@ -52,6 +54,7 @@ function HomeScreen({navigation}: HomeScreenProps) {
         justifyContent: 'space-evenly',
         padding: 120,
       }}>
+        <CustomButton/>
       <Button title="Teachers" onPress={() => navigation.navigate('Teacher')} />
       <Button title="Staff" onPress={() => navigation.navigate('Staff')} />
       <Button title="Notice" onPress={() => navigation.navigate('Notice')} />
