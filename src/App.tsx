@@ -9,10 +9,14 @@ import {
   NativeStackScreenProps,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
-import CustomButton from 'component/ui/CustomButton';
-// import CustomButton from 'component/ui/CustomButton';
+// import CustomButton from 'ui/CustomButtons';
+import CustomButton from '@ui/CustomButton';
 import React from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
+import {Provider} from 'react-redux';
+import HomeScreenNew from 'screens/Home/HomeScreenNew';
+import store from 'store/store';
+// import {store} from 'store/store';
 
 type RootStackParamList = {
   Home: undefined;
@@ -54,11 +58,26 @@ function HomeScreen({navigation}: HomeScreenProps) {
         justifyContent: 'space-evenly',
         padding: 120,
       }}>
-        <CustomButton/>
-      <Button title="Teachers" onPress={() => navigation.navigate('Teacher')} />
-      <Button title="Staff" onPress={() => navigation.navigate('Staff')} />
-      <Button title="Notice" onPress={() => navigation.navigate('Notice')} />
-      <Button
+      {/* <CustomButton /> */}
+      <CustomButton
+        onPress={() => {
+          console.log('first');
+        }}
+        title="This is Custom"
+      />
+      <CustomButton
+        title="Teachers"
+        onPress={() => navigation.navigate('Teacher')}
+      />
+      <CustomButton
+        title="Staff"
+        onPress={() => navigation.navigate('Staff')}
+      />
+      <CustomButton
+        title="Notice"
+        onPress={() => navigation.navigate('Notice')}
+      />
+      <CustomButton
         title="Resource"
         onPress={() => navigation.navigate('Resource')}
       />
@@ -176,7 +195,7 @@ function DetailsScreen({route, navigation}: DetailsScreenProps) {
 function App(): JSX.Element {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      {/* <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
           name="IndividualDetails"
           component={DetailsScreen}
@@ -207,7 +226,10 @@ function App(): JSX.Element {
           options={{title: 'Resources'}}
           component={ResourceScreen}
         />
-      </Stack.Navigator>
+      </Stack.Navigator> */}
+      <Provider store={store}>
+        <HomeScreenNew />
+      </Provider>
     </NavigationContainer>
   );
 }
