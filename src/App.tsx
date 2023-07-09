@@ -234,7 +234,9 @@ function App(): JSX.Element {
         />
       </Stack.Navigator> */}
       <Provider store={store}>
-        <HomeScreenNew />
+        <View style={{marginTop: 50}}>
+          <HomeScreenNew />
+        </View>
       </Provider>
     </NavigationContainer>
   );

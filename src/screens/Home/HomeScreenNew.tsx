@@ -2,22 +2,25 @@ import React from 'react';
 import {useDispatch} from 'react-redux';
 import {setColor} from '@store/slices/ColorSlice';
 import {Text, View, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
-import {useTypedSelector} from '@store/store';
+import {useAppDispatch, useTypedSelector} from '@store/store';
 import RootState from '@store/store.types';
 import ToggleTheme from '@ui/ToggleTheme';
+import {theme} from '@utils/theme';
 
 const HomeScreen = () => {
-  const color = useTypedSelector((state: RootState) => state.color.value);
-  const theme = useTypedSelector(
-    (state: RootState) => state.theme.currentTheme,
-  );
-  console.log('Color: ', color, theme);
-  const dispatch = useDispatch();
+  const color = useTypedSelector(state => state.color.value);
+  const currentTheme = useTypedSelector(state => state.theme.currentTheme);
+  const themeStyle = {
+    backgroundColor: theme[currentTheme].base,
+    color: theme[currentTheme].secondaryColor,
+  };
+
+  const dispatch = useAppDispatch();
 
   return (
-    <View>
+    <View style={[themeStyle]}>
       <ToggleTheme />
-      <Text>Current Theme: {theme}</Text>
+      <Text>Current Theme: {currentTheme}</Text>
       <TouchableOpacity
         onPress={() => dispatch(setColor())}
         style={styles.button}>

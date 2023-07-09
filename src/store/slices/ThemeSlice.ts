@@ -1,10 +1,10 @@
-// themeSlice.ts
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {AppDispatch} from '../store';
 
+type ThemeColors = 'light' | 'dark';
 export interface ThemeState {
-  currentTheme: string; // Can be "dark" or "light"
+  currentTheme: ThemeColors;
 }
 
 const initialState: ThemeState = {
@@ -14,7 +14,7 @@ const initialState: ThemeState = {
 export const loadThemeFromAsyncStorage = () => {
   return async (dispatch: AppDispatch) => {
     try {
-      const theme = await AsyncStorage.getItem('theme');
+      const theme = (await AsyncStorage.getItem('theme')) as ThemeColors;
       if (theme) {
         dispatch(setTheme(theme));
       }
@@ -24,7 +24,7 @@ export const loadThemeFromAsyncStorage = () => {
   };
 };
 
-export const setTheme = (theme: string) => {
+export const setTheme = (theme: ThemeColors) => {
   return async (dispatch: AppDispatch) => {
     try {
       await AsyncStorage.setItem('theme', theme);
@@ -39,7 +39,7 @@ const themeSlice = createSlice({
   name: 'theme',
   initialState,
   reducers: {
-    toggleTheme: (state, action: PayloadAction<string>) => {
+    toggleTheme: (state, action: PayloadAction<ThemeColors>) => {
       state.currentTheme = action.payload;
     },
   },
