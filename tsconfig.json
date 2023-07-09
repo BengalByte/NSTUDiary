@@ -6,7 +6,10 @@
       "*": ["src/*"],
       "tests": ["tests/*"],
       "@components/*": ["src/components/*"],
-      "@ui/*": ["src/ui/*"]
+      "@ui/*": ["src/ui/*"],
+      "@store/*": ["src/store/*"],
+      "@utils/*": ["src/utils/*"],
+      "@screens/*": ["src/screens/*"]
     }
   }
 }
