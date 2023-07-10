@@ -11,13 +11,11 @@ import {
 } from '@react-navigation/native-stack';
 // import CustomButton from 'ui/CustomButtons';
 import CustomButton from '@ui/CustomButton';
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
 import {Provider} from 'react-redux';
 import HomeScreenNew from '@screens/Home/HomeScreenNew';
 import store, {useAppDispatch} from 'store/store';
-import {loadThemeFromAsyncStorage} from 'store/slices/ThemeSlice';
-// import {store} from 'store/store';
 
 type RootStackParamList = {
   Home: undefined;
@@ -194,11 +192,6 @@ function DetailsScreen({route, navigation}: DetailsScreenProps) {
 }
 
 function App(): JSX.Element {
-  // const dispatch = useAppDispatch();
-  // useEffect(() => {
-  //   dispatch(loadThemeFromAsyncStorage());
-  // }, [dispatch]);
-
   return (
     <NavigationContainer>
       {/* <Stack.Navigator initialRouteName="Home">

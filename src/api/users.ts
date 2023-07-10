@@ -7,10 +7,13 @@ const usersApi = createApi({
     getUsers: builder.query<any, void>({
       query: () => 'users',
     }),
+    getPosts: builder.query<any, void>({
+      query: () => 'posts',
+    }),
   }),
 });
 
-export const {useGetUsersQuery} = usersApi;
+export const {useGetUsersQuery, useGetPostsQuery} = usersApi;
 
 export const selectUsers = usersApi.endpoints.getUsers.select;
 

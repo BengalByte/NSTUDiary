@@ -5,12 +5,14 @@ import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import themeSlice from './slices/ThemeSlice';
 import usersApi from 'api/users';
 import usersSlice from './slices/UsersSlice';
+import postsSlice from './slices/PostsSlice';
 
 const store = configureStore({
   reducer: {
     color: colorSlice,
     theme: themeSlice,
     users: usersSlice,
+    posts: postsSlice,
     [usersApi.reducerPath]: usersApi.reducer,
   },
   middleware: getDefaultMiddleware =>

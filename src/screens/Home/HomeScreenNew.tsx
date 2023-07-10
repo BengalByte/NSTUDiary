@@ -1,12 +1,10 @@
-import React, {useEffect} from 'react';
-import {useDispatch} from 'react-redux';
+import React from 'react';
 import {setColor} from '@store/slices/ColorSlice';
 import {Text, View, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
 import {useAppDispatch, useTypedSelector} from '@store/store';
-import RootState from '@store/store.types';
 import ToggleTheme from '@ui/ToggleTheme';
 import {theme} from '@utils/theme';
-import {useGetUsersQuery} from 'api/users';
+import {useGetPostsQuery, useGetUsersQuery} from 'api/users';
 
 const HomeScreen = () => {
   const dispatch = useAppDispatch();
@@ -19,11 +17,12 @@ const HomeScreen = () => {
     color: theme[currentTheme].secondaryColor,
   };
   // Fetch Data:
-  const {data, isLoading, error} = useGetUsersQuery();
+  // const {data, isLoading, error} = useGetUsersQuery();
+  const {data: posts, error, isLoading} = useGetPostsQuery();
 
   // Data stored in the store. And can be fetched from other components
-  const users = useTypedSelector(state => state.users.data);
-  console.log('Data Available:', users);
+  const postData = useTypedSelector(state => state.posts.data);
+  console.log('Data Available:', postData);
 
   return (
     <View style={[themeStyle]}>
