@@ -1,6 +1,10 @@
 import React, {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
-import {loadThemeFromAsyncStorage, toggleTheme} from '@store/slices/ThemeSlice';
+import {
+  loadThemeFromAsyncStorage,
+  setTheme,
+  toggleTheme,
+} from '@store/slices/ThemeSlice';
 import CustomButton from '@ui/CustomButton';
 import {useAppDispatch, useTypedSelector} from '@store/store';
 
@@ -12,9 +16,12 @@ const ToggleTheme: React.FC = () => {
   }, [dispatch]);
 
   const handleToggleTheme = () => {
+    console.log('This is Log');
     if (currentTheme === 'light') {
       dispatch(toggleTheme('dark'));
+      dispatch(setTheme('dark'));
     } else {
+      dispatch(setTheme('light'));
       dispatch(toggleTheme('light'));
     }
   };
