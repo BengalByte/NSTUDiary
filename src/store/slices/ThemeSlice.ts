@@ -4,6 +4,7 @@ import {AppDispatch} from '../store';
 import RootState from 'store/store.types';
 
 type ThemeColors = 'light' | 'dark';
+
 export interface ThemeState {
   currentTheme: ThemeColors;
 }
@@ -28,7 +29,7 @@ export const loadThemeFromAsyncStorage = () => {
 };
 
 export const setTheme = (theme: ThemeColors) => {
-  return async (dispatch: AppDispatch, getState: () => RootState) => {
+  return async (dispatch: AppDispatch) => {
     try {
       await AsyncStorage.setItem('theme', theme);
       dispatch(themeSlice.actions.toggleTheme(theme));
