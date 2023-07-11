@@ -1,12 +1,11 @@
 import React, {useEffect} from 'react';
-import {useDispatch} from 'react-redux';
 import {
   loadThemeFromAsyncStorage,
   setTheme,
   toggleTheme,
 } from '@store/slices/ThemeSlice';
-import CustomButton from '@ui/CustomButton';
 import {useAppDispatch, useTypedSelector} from '@store/store';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 
 const ToggleTheme: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -27,12 +26,20 @@ const ToggleTheme: React.FC = () => {
   };
 
   return (
-    <CustomButton
-      variant="primary"
-      onPress={handleToggleTheme}
-      title="Toggle"
-    />
+    <TouchableOpacity
+      style={styles.toggleBody}
+      activeOpacity={0.5}
+      onPress={handleToggleTheme}></TouchableOpacity>
   );
 };
 
 export default ToggleTheme;
+
+const styles = StyleSheet.create({
+  toggleBody: {
+    width: 50,
+    height: 50,
+    backgroundColor: 'teal',
+    borderRadius: 10,
+  },
+});

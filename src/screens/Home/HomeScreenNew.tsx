@@ -10,7 +10,7 @@ import {
   useGetUsersQuery,
 } from 'api/users';
 
-const HomeScreen = () => {
+const HomeScreenNew = () => {
   const dispatch = useAppDispatch();
 
   const currentTheme = useTypedSelector(state => state.theme.currentTheme);
@@ -60,7 +60,7 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default HomeScreenNew;
 
 const styles = StyleSheet.create({
   button: {
