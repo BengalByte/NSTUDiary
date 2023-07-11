@@ -1,4 +1,4 @@
-import {ColorState} from './slices/ColorSlice'; // Assuming you have imported the ColorState interface from ColorSlice
+import {ColorState} from './slices/ColorSlice';
 import {PostsState} from './slices/PostsSlice';
 import {ThemeState} from './slices/ThemeSlice';
 import {UsersState} from './slices/UsersSlice';

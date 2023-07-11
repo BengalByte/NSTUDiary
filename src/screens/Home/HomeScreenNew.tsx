@@ -4,7 +4,11 @@ import {Text, View, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
 import {useAppDispatch, useTypedSelector} from '@store/store';
 import ToggleTheme from '@ui/ToggleTheme';
 import {theme} from '@utils/theme';
-import {useGetPostsQuery, useGetUsersQuery} from 'api/users';
+import {
+  useGetPostByIDQuery,
+  useGetPostsQuery,
+  useGetUsersQuery,
+} from 'api/users';
 
 const HomeScreen = () => {
   const dispatch = useAppDispatch();
@@ -18,11 +22,12 @@ const HomeScreen = () => {
   };
   // Fetch Data:
   // const {data, isLoading, error} = useGetUsersQuery();
-  const {data: posts, error, isLoading} = useGetPostsQuery();
+  // const {data: posts, error, isLoading} = useGetPostsQuery();
+  const {data: post, error, isLoading} = useGetPostByIDQuery(1);
 
   // Data stored in the store. And can be fetched from other components
-  const postData = useTypedSelector(state => state.posts.data);
-  console.log('Data Available:', postData);
+  // const postData = useTypedSelector(state => state.posts.data);
+  console.log('Data Available:', post);
 
   return (
     <View style={[themeStyle]}>

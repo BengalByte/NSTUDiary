@@ -26,7 +26,13 @@ const ToggleTheme: React.FC = () => {
     }
   };
 
-  return <CustomButton onPress={handleToggleTheme} title="Toggle" />;
+  return (
+    <CustomButton
+      variant="primary"
+      onPress={handleToggleTheme}
+      title="Toggle"
+    />
+  );
 };
 
 export default ToggleTheme;
