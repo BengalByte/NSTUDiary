@@ -1,7 +1,7 @@
 import React from 'react';
 import {ViewStyle, TextStyle} from 'react-native';
-import SecondaryButton from './SecondaryButton';
-import PrimaryButton from './PrimaryButton';
+import SecondaryButton from './Variant/SecondaryButton';
+import PrimaryButton from './Variant/PrimaryButton';
 import {CustomButtonVariantProps} from './CustomButton.types';
 
 interface CustomButtonProps {
@@ -35,7 +35,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
     <ButtonComponent
       onPress={onPress}
       title={title}
-      style={style}
+      style={{...style, marginTop: 30}}
       textStyle={textStyle}
     />
   );

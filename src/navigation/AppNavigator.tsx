@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {
@@ -11,10 +11,14 @@ import StaffScreen from 'screens/Staff/StaffScreen';
 import NoticeScreen from 'screens/Notice/NoticeScreen';
 import ResourceScreen from 'screens/Resource/ResourceScreen';
 import IndividualDetailScreen from 'screens/IndividualDetail/IndividualDetailScreen';
+import {useTypedSelector} from 'store/store';
+import {theme} from 'utils/theme';
+import ToggleTheme from 'ui/ToggleTheme';
+import Rp from '../hooks/useResponsiveSize';
 
 type RootStackParamList = {
   Home: undefined;
-  IndividualDetails: {userId: number; otherParam: string};
+  IndividualDetails: {userId: number; name: string};
   Teacher: undefined;
   Staff: undefined;
   Resource: undefined;
@@ -48,18 +52,29 @@ export type DetailsScreenProps = NativeStackScreenProps<
 >;
 
 const AppNavigator = () => {
+  const currentTheme = useTypedSelector(state => state.theme.currentTheme);
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: theme[currentTheme].base,
+          },
+          headerTintColor: theme[currentTheme].textColor,
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+          headerTitleAlign: 'center',
+          headerRight: () => <ToggleTheme />,
+          // headerTitle: props => <HeaderView {...props} />,
+        }}>
         <Stack.Screen
           name="Home"
-          options={{title: 'Home'}}
+          options={{
+            title: 'Home',
+          }}
           component={HomeScreen}
-        />
-        <Stack.Screen
-          name="IndividualDetails"
-          component={IndividualDetailScreen}
-          options={{title: 'Individual'}}
         />
         <Stack.Screen
           name="Teacher"
@@ -80,6 +95,11 @@ const AppNavigator = () => {
           name="Resource"
           options={{title: 'Resources'}}
           component={ResourceScreen}
+        />
+        <Stack.Screen
+          name="IndividualDetails"
+          component={IndividualDetailScreen}
+          options={({navigation, route}) => ({title: route.params.name})}
         />
       </Stack.Navigator>
     </NavigationContainer>

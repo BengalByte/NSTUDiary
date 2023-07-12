@@ -5,10 +5,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingVertical: 12,
     paddingHorizontal: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   text: {
-    color: 'white',
-    fontSize: 16,
     fontWeight: 'bold',
   },
 });
