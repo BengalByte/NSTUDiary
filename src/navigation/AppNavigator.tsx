@@ -15,6 +15,7 @@ import {useTypedSelector} from 'store/store';
 import {theme} from 'utils/theme';
 import ToggleTheme from 'ui/ToggleTheme';
 import Rp from '../hooks/useResponsiveSize';
+import useResponsiveSize from '@hooks/useResponsiveSize';
 
 type RootStackParamList = {
   Home: undefined;
@@ -51,7 +52,26 @@ export type DetailsScreenProps = NativeStackScreenProps<
   'IndividualDetails'
 >;
 
+type HeaderViewProps = {
+  children: string;
+  color: string;
+  size: number;
+  // tintColor: string;
+};
+
+const HeaderView = (props: HeaderViewProps) => {
+  console.log('The Props', props);
+  return (
+    <View style={{height: props.size, justifyContent: 'center'}}>
+      <Text style={{fontSize: props.size / 2, color: props.color}}>
+        {props.children}
+      </Text>
+    </View>
+  );
+};
+
 const AppNavigator = () => {
+  const {Rp} = useResponsiveSize();
   const currentTheme = useTypedSelector(state => state.theme.currentTheme);
   return (
     <NavigationContainer>
@@ -67,7 +87,14 @@ const AppNavigator = () => {
           },
           headerTitleAlign: 'center',
           headerRight: () => <ToggleTheme />,
-          // headerTitle: props => <HeaderView {...props} />,
+          animation: 'slide_from_right',
+          headerTitle: props => (
+            <HeaderView
+              size={Rp(110)}
+              color={theme[currentTheme].textColor}
+              {...props}
+            />
+          ),
         }}>
         <Stack.Screen
           name="Home"

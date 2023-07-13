@@ -3,6 +3,7 @@ import React from 'react';
 import {TeacherScreenProps} from 'navigation/AppNavigator';
 import CustomButton from 'ui/CustomButton';
 import ScreenLayout from 'screens/ScreenLayout';
+import CustomIcon from 'components/CustomIcon';
 
 const TeachersScreen = ({navigation}: TeacherScreenProps) => {
   return (
@@ -15,6 +16,7 @@ const TeachersScreen = ({navigation}: TeacherScreenProps) => {
           padding: 120,
         }}>
         <Text>This is Teacher Screen</Text>
+        <CustomIcon name="day" size={50} color={'red'} />
         <CustomButton
           variant="secondary"
           title="Go to Home"

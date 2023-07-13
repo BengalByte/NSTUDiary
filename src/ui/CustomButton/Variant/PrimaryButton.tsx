@@ -27,7 +27,7 @@ const PrimaryButton: React.FC<CustomButtonVariantProps> = ({
     textPrimaryStyle: {
       textAlign: 'center',
       fontSize: Rp(40),
-      color: theme[currentTheme].base,
+      color: theme[currentTheme].white,
     },
   });
 

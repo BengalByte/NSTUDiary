@@ -18,16 +18,15 @@ const SecondaryButton: React.FC<CustomButtonVariantProps> = ({
   const variantStyles = StyleSheet.create({
     themeSecondaryStyle: {
       backgroundColor: 'transparent',
-      color: theme[currentTheme].primaryColor,
       borderWidth: Rp(3),
-      borderColor: theme[currentTheme].secondaryColor,
+      borderColor: theme[currentTheme].primaryColor,
     },
     sizeSecondaryStyle: {
       width: Rp(500),
       height: Rp(120),
     },
     textSecondaryStyle: {
-      color: theme[currentTheme].secondaryColor,
+      color: theme[currentTheme].primaryColor,
       textAlign: 'center',
     },
   });

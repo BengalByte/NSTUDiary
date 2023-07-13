@@ -5,8 +5,10 @@ import {
   toggleTheme,
 } from '@store/slices/ThemeSlice';
 import {useAppDispatch, useTypedSelector} from '@store/store';
-import {StyleSheet, TouchableOpacity} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import useResponsiveSize from '../../hooks/useResponsiveSize';
+import {theme} from 'utils/theme';
+import CustomIcon from 'components/CustomIcon';
 
 const ToggleTheme: React.FC = () => {
   const {Rp} = useResponsiveSize();
@@ -30,16 +32,38 @@ const ToggleTheme: React.FC = () => {
     toggleBody: {
       width: Rp(100),
       height: Rp(100),
-      backgroundColor: 'teal',
+      // backgroundColor: 'teal',
       borderRadius: 10,
+      borderWidth: Rp(3),
+      borderColor: theme[currentTheme].primaryColor,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
   });
 
   return (
     <TouchableOpacity
       style={styles.toggleBody}
-      activeOpacity={0.5}
-      onPress={handleToggleTheme}></TouchableOpacity>
+      activeOpacity={0.8}
+      onPress={handleToggleTheme}>
+      {/* <CustomIcon name="moon" size="20" /> */}
+      {currentTheme === 'dark' ? (
+        <View style={{}}>
+          <CustomIcon
+            style={{}}
+            name="night"
+            size={Rp(80)}
+            color={theme[currentTheme].primaryColor}
+          />
+        </View>
+      ) : (
+        <CustomIcon
+          name="day"
+          size={Rp(80)}
+          color={theme[currentTheme].primaryColor}
+        />
+      )}
+    </TouchableOpacity>
   );
 };
 
