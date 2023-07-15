@@ -16,6 +16,7 @@ import {theme} from 'utils/theme';
 import ToggleTheme from 'ui/ToggleTheme';
 import Rp from '../hooks/useResponsiveSize';
 import useResponsiveSize from '@hooks/useResponsiveSize';
+import SignIn from 'screens/SignIn/SignIn';
 
 type RootStackParamList = {
   Home: undefined;
@@ -24,12 +25,17 @@ type RootStackParamList = {
   Staff: undefined;
   Resource: undefined;
   Notice: undefined;
+  SignIn: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 export type HomeScreenProps = NativeStackScreenProps<
   RootStackParamList,
   'Home'
+>;
+export type SignInScreenProps = NativeStackScreenProps<
+  RootStackParamList,
+  'SignIn'
 >;
 export type TeacherScreenProps = NativeStackScreenProps<
   RootStackParamList,
@@ -76,7 +82,7 @@ const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Home"
+        // initialRouteName="Home"
         screenOptions={{
           headerStyle: {
             backgroundColor: theme[currentTheme].base,
@@ -96,38 +102,52 @@ const AppNavigator = () => {
             />
           ),
         }}>
-        <Stack.Screen
-          name="Home"
-          options={{
-            title: 'Home',
-          }}
-          component={HomeScreen}
-        />
-        <Stack.Screen
-          name="Teacher"
-          options={{title: 'Teachers'}}
-          component={TeachersScreen}
-        />
-        <Stack.Screen
-          name="Staff"
-          options={{title: 'Staffs'}}
-          component={StaffScreen}
-        />
-        <Stack.Screen
-          name="Notice"
-          options={{title: 'Notice Board'}}
-          component={NoticeScreen}
-        />
-        <Stack.Screen
-          name="Resource"
-          options={{title: 'Resources'}}
-          component={ResourceScreen}
-        />
-        <Stack.Screen
-          name="IndividualDetails"
-          component={IndividualDetailScreen}
-          options={({navigation, route}) => ({title: route.params.name})}
-        />
+        {false ? (
+          <>
+            <Stack.Screen
+              name="SignIn"
+              options={{
+                title: 'Sign In',
+              }}
+              component={SignIn}
+            />
+          </>
+        ) : (
+          <>
+            <Stack.Screen
+              name="Home"
+              options={{
+                title: 'Home',
+              }}
+              component={HomeScreen}
+            />
+            <Stack.Screen
+              name="Teacher"
+              options={{title: 'Teachers'}}
+              component={TeachersScreen}
+            />
+            <Stack.Screen
+              name="Staff"
+              options={{title: 'Staffs'}}
+              component={StaffScreen}
+            />
+            <Stack.Screen
+              name="Notice"
+              options={{title: 'Notice Board'}}
+              component={NoticeScreen}
+            />
+            <Stack.Screen
+              name="Resource"
+              options={{title: 'Resources'}}
+              component={ResourceScreen}
+            />
+            <Stack.Screen
+              name="IndividualDetails"
+              component={IndividualDetailScreen}
+              options={({navigation, route}) => ({title: route.params.name})}
+            />
+          </>
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );

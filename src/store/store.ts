@@ -6,6 +6,7 @@ import themeSlice from './slices/ThemeSlice';
 import usersApi from 'api/users';
 import usersSlice from './slices/UsersSlice';
 import postsSlice from './slices/PostsSlice';
+import tokenSlice from './slices/TokenSlice';
 
 const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ const store = configureStore({
     theme: themeSlice,
     users: usersSlice,
     posts: postsSlice,
+    token: tokenSlice,
     [usersApi.reducerPath]: usersApi.reducer,
   },
   middleware: getDefaultMiddleware =>
