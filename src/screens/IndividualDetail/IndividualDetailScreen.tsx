@@ -3,9 +3,13 @@ import React from 'react';
 import {DetailsScreenProps} from 'navigation/AppNavigator';
 import CustomButton from 'ui/CustomButton';
 import ScreenLayout from 'screens/ScreenLayout';
+import {mockUser} from 'api/mockData';
 
 const IndividualDetailScreen = ({route, navigation}: DetailsScreenProps) => {
-  const {userId, name} = route.params;
+  // const {userId, name} = route.params;
+  const {userId, name, imageURL, bio, position, phone, mail, facebook} =
+    mockUser;
+  console.log(mockUser);
   return (
     <ScreenLayout>
       <View
@@ -18,17 +22,17 @@ const IndividualDetailScreen = ({route, navigation}: DetailsScreenProps) => {
         }}>
         <Text>Individual Details Screen</Text>
         <Text>UserID: {userId}</Text>
-        <CustomButton
+        {/* <CustomButton
           variant="primary"
           title="Go Back"
           onPress={() => navigation.goBack()}
-        />
+        /> */}
         <CustomButton
           variant="primary"
           title="Go To Other Individual Profile"
           onPress={() =>
             navigation.push('IndividualDetails', {
-              userId: userId + 1,
+              userId: userId,
               name: 'Another User',
             })
           }

@@ -20,7 +20,7 @@ import SignIn from 'screens/SignIn/SignIn';
 
 type RootStackParamList = {
   Home: undefined;
-  IndividualDetails: {userId: number; name: string};
+  IndividualDetails: {userId: string; name: string};
   Teacher: undefined;
   Staff: undefined;
   Resource: undefined;
@@ -102,7 +102,7 @@ const AppNavigator = () => {
             />
           ),
         }}>
-        {true ? (
+        {false ? (
           <>
             <Stack.Screen
               name="SignIn"

@@ -52,14 +52,14 @@ const ToggleTheme: React.FC = () => {
           <CustomIcon
             style={{}}
             name="night"
-            size={Rp(80)}
+            size={Rp(60)}
             color={theme[currentTheme].primaryColor}
           />
         </View>
       ) : (
         <CustomIcon
           name="day"
-          size={Rp(80)}
+          size={Rp(60)}
           color={theme[currentTheme].primaryColor}
         />
       )}
