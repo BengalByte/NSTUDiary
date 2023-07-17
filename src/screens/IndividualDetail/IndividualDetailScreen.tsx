@@ -4,6 +4,8 @@ import {DetailsScreenProps} from 'navigation/AppNavigator';
 import CustomButton from 'ui/CustomButton';
 import ScreenLayout from 'screens/ScreenLayout';
 import {mockUser} from 'api/mockData';
+import Avatar from 'ui/Avatar';
+import InfoCard from 'ui/InfoCard';
 
 const IndividualDetailScreen = ({route, navigation}: DetailsScreenProps) => {
   // const {userId, name} = route.params;
@@ -22,11 +24,17 @@ const IndividualDetailScreen = ({route, navigation}: DetailsScreenProps) => {
         }}>
         <Text>Individual Details Screen</Text>
         <Text>UserID: {userId}</Text>
-        {/* <CustomButton
-          variant="primary"
-          title="Go Back"
-          onPress={() => navigation.goBack()}
-        /> */}
+        <Avatar imageUrl={imageURL} />
+        <InfoCard
+          icon="day"
+          content="0123456"
+          onPress={() => console.log('Phone')}
+        />
+        <InfoCard
+          icon="night"
+          content="rifat.hasib@gmail.com"
+          onPress={() => console.log('mail')}
+        />
         <CustomButton
           variant="primary"
           title="Go To Other Individual Profile"

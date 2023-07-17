@@ -38,6 +38,7 @@ const CustomInput: React.FC<CustomInputVariantProps> = ({
       placeholderTextColor={theme[currentTheme].neutral10}
       autoCapitalize="none"
       autoCorrect={false}
+      secureTextEntry={true}
       style={[
         styles.input,
         variantStyles.themePrimaryStyle,

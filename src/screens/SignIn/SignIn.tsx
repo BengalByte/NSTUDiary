@@ -2,18 +2,21 @@ import {StyleSheet, View} from 'react-native';
 import React from 'react';
 import CustomInput from 'ui/CustomInput';
 import ScreenLayout from 'screens/ScreenLayout';
+import CustomTextInput from 'ui/CustomTextInput';
 
 const SignIn = () => {
   return (
     <ScreenLayout>
       <View>
         {/* <Text style={{fontSize: 30}}>SignIn</Text> */}
-        <CustomInput
+        <CustomTextInput
+          label="Email"
           variant="primary"
           onChangeText={() => {}}
           placeholder="Placeholder"
         />
-        <CustomInput
+        <CustomTextInput
+          label="Password"
           variant="secondary"
           onChangeText={() => {}}
           placeholder="Placeholder"

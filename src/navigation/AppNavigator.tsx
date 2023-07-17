@@ -102,7 +102,7 @@ const AppNavigator = () => {
             />
           ),
         }}>
-        {false ? (
+        {true ? (
           <>
             <Stack.Screen
               name="SignIn"

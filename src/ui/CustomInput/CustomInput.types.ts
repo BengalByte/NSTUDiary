@@ -5,4 +5,6 @@ export type CustomInputVariantProps = {
   onChangeText: (text: string) => void;
   placeholder?: string;
   style?: ViewStyle;
+  password?: false | boolean;
+  multiline?: false | boolean;
 };
