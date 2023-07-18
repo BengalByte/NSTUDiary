@@ -6,12 +6,23 @@ import ScreenLayout from 'screens/ScreenLayout';
 import {mockUser} from 'api/mockData';
 import Avatar from 'ui/Avatar';
 import InfoCard from 'ui/InfoCard';
+import useResponsiveSize from 'hooks/useResponsiveSize';
 
 const IndividualDetailScreen = ({route, navigation}: DetailsScreenProps) => {
   // const {userId, name} = route.params;
   const {userId, name, imageURL, bio, position, phone, mail, facebook} =
     mockUser;
+  const {Rp} = useResponsiveSize();
   console.log(mockUser);
+  const styles = StyleSheet.create({
+    name: {
+      fontSize: Rp(55),
+      fontWeight: 'bold',
+    },
+    position: {
+      fontSize: Rp(40),
+    },
+  });
   return (
     <ScreenLayout>
       <View
@@ -22,8 +33,8 @@ const IndividualDetailScreen = ({route, navigation}: DetailsScreenProps) => {
           paddingHorizontal: 100,
           paddingVertical: 150,
         }}>
-        <Text>Individual Details Screen</Text>
-        <Text>UserID: {userId}</Text>
+        <Text style={styles.name}>{name}</Text>
+        <Text style={styles.position}>{userId}</Text>
         <Avatar imageUrl={imageURL} />
         <InfoCard
           icon="day"

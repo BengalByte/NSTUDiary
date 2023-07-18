@@ -11,6 +11,7 @@ const CustomInputSecondary: React.FC<CustomInputVariantProps> = ({
   onChangeText,
   placeholder,
   style,
+  inputType,
 }) => {
   const {Rp} = useResponsiveSize();
   const currentTheme = useTypedSelector(state => state.theme.currentTheme);
@@ -35,6 +36,7 @@ const CustomInputSecondary: React.FC<CustomInputVariantProps> = ({
       onChangeText={onChangeText}
       placeholder={placeholder}
       placeholderTextColor={theme[currentTheme].neutral}
+      secureTextEntry={inputType === 'password' ? true : false}
       autoCapitalize="none"
       autoCorrect={false}
       style={[

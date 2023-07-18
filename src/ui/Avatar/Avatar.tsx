@@ -3,15 +3,16 @@ import React from 'react';
 import useResponsiveSize from 'hooks/useResponsiveSize';
 
 type AvatarProps = {
+  size?: number;
   imageUrl: string;
 };
 
-const Avatar: React.FC<AvatarProps> = ({imageUrl}) => {
+const Avatar: React.FC<AvatarProps> = ({imageUrl, size}) => {
   const {Rp} = useResponsiveSize();
   const styles = StyleSheet.create({
     avatar: {
-      width: Rp(250),
-      height: Rp(250),
+      width: size ? size : Rp(250),
+      height: size ? size : Rp(250),
       borderRadius: Rp(125),
     },
   });

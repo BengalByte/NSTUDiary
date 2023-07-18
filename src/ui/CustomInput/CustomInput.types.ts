@@ -7,4 +7,5 @@ export type CustomInputVariantProps = {
   style?: ViewStyle;
   password?: false | boolean;
   multiline?: false | boolean;
+  inputType: string;
 };

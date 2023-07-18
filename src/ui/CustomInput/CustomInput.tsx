@@ -7,6 +7,7 @@ import {CustomInputVariantProps} from './CustomInput.types';
 
 interface CustomInputProps {
   defaultValue?: string;
+  inputType: string;
   onChangeText: (text: string) => void;
   placeholder?: string;
   variant: 'primary' | 'secondary';
@@ -28,11 +29,13 @@ const CustomInput: React.FC<CustomInputProps> = ({
   placeholder,
   style,
   variant,
+  inputType,
 }) => {
   const InputComponent = VARIANT_COMPONENT_MAP[variant] || PrimaryInput;
 
   return (
     <InputComponent
+      inputType={inputType}
       defaultValue={defaultValue ?? ''}
       onChangeText={onChangeText}
       placeholder={placeholder}

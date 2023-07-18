@@ -1,6 +1,5 @@
 import {StyleSheet, View} from 'react-native';
 import React from 'react';
-import CustomInput from 'ui/CustomInput';
 import ScreenLayout from 'screens/ScreenLayout';
 import CustomTextInput from 'ui/CustomTextInput';
 
@@ -10,16 +9,18 @@ const SignIn = () => {
       <View>
         {/* <Text style={{fontSize: 30}}>SignIn</Text> */}
         <CustomTextInput
+          inputType="text"
           label="Email"
           variant="primary"
           onChangeText={() => {}}
-          placeholder="Placeholder"
+          placeholder="example@email.com"
         />
         <CustomTextInput
+          inputType="password"
           label="Password"
           variant="secondary"
           onChangeText={() => {}}
-          placeholder="Placeholder"
+          placeholder="secret"
         />
       </View>
     </ScreenLayout>

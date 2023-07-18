@@ -2,6 +2,8 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import CustomIcon from 'components/CustomIcon';
 import useResponsiveSize from 'hooks/useResponsiveSize';
+import {theme} from 'utils/theme';
+import {useTypedSelector} from 'store/store';
 
 type InfoCardProps = {
   icon: string;
@@ -10,13 +12,15 @@ type InfoCardProps = {
 };
 
 const InfoCard: React.FC<InfoCardProps> = ({icon, content, onPress}) => {
+  const currentTheme = useTypedSelector(state => state.theme.currentTheme);
   const {Rp} = useResponsiveSize();
   const styles = StyleSheet.create({
     body: {
       width: Rp(850),
       height: Rp(120),
       borderRadius: Rp(20),
-      borderWidth: Rp(3),
+      borderColor: theme[currentTheme].textColor,
+      borderWidth: Rp(2),
       justifyContent: 'flex-start',
       alignItems: 'center',
       display: 'flex',
@@ -24,14 +28,17 @@ const InfoCard: React.FC<InfoCardProps> = ({icon, content, onPress}) => {
     },
     icon: {
       marginHorizontal: Rp(30),
+      color: theme[currentTheme].textColor,
+      fontSize: Rp(60),
     },
     text: {
       fontSize: Rp(35),
+      color: theme[currentTheme].textColor,
     },
   });
   return (
     <TouchableOpacity style={styles.body} onPress={onPress}>
-      <CustomIcon style={styles.icon} name={icon} size={Rp(60)} />
+      <CustomIcon style={styles.icon} name={icon} />
       <Text style={styles.text}>{content}</Text>
     </TouchableOpacity>
   );

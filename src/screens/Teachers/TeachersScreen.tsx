@@ -4,6 +4,7 @@ import {TeacherScreenProps} from 'navigation/AppNavigator';
 import CustomButton from 'ui/CustomButton';
 import ScreenLayout from 'screens/ScreenLayout';
 import CustomIcon from 'components/CustomIcon';
+import IndividualCard from 'ui/IndividualCard';
 
 const TeachersScreen = ({navigation}: TeacherScreenProps) => {
   return (
@@ -15,8 +16,17 @@ const TeachersScreen = ({navigation}: TeacherScreenProps) => {
           justifyContent: 'space-evenly',
           padding: 120,
         }}>
-        <Text>This is Teacher Screen</Text>
-        <CustomIcon name="day" size={50} color={'red'} />
+        <IndividualCard
+          imageUrl="https://randomuser.me/api/portraits/lego/4.jpg"
+          name="Teacher"
+          position="Associate Professor"
+          pressHandler={() =>
+            navigation.navigate('IndividualDetails', {
+              userId: '86',
+              name: 'Mr. Y',
+            })
+          }
+        />
         <CustomButton
           variant="secondary"
           title="Go to Home"
@@ -25,12 +35,7 @@ const TeachersScreen = ({navigation}: TeacherScreenProps) => {
         <CustomButton
           variant="secondary"
           title="Go to Teacher1 Details"
-          onPress={() =>
-            navigation.navigate('IndividualDetails', {
-              userId: 86,
-              name: 'Mr. Y',
-            })
-          }
+          onPress={() => {}}
         />
       </View>
     </ScreenLayout>
