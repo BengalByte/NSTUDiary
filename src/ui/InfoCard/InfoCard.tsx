@@ -16,6 +16,7 @@ const InfoCard: React.FC<InfoCardProps> = ({icon, content, onPress}) => {
   const {Rp} = useResponsiveSize();
   const styles = StyleSheet.create({
     body: {
+      marginTop: Rp(20),
       width: Rp(850),
       height: Rp(120),
       borderRadius: Rp(20),

@@ -5,37 +5,24 @@ import CustomButton from 'ui/CustomButton';
 import ScreenLayout from 'screens/ScreenLayout';
 import CustomIcon from 'components/CustomIcon';
 import IndividualCard from 'ui/IndividualCard';
+import {mockUser} from 'api/mockData';
 
 const TeachersScreen = ({navigation}: TeacherScreenProps) => {
+  const {bio, facebook, imageURL, mail, name, phone, position, userId} =
+    mockUser;
   return (
     <ScreenLayout>
-      <View
-        style={{
-          flex: 1,
-          alignItems: 'center',
-          justifyContent: 'space-evenly',
-          padding: 120,
-        }}>
+      <View style={styles.body}>
         <IndividualCard
-          imageUrl="https://randomuser.me/api/portraits/lego/4.jpg"
-          name="Teacher"
-          position="Associate Professor"
+          imageUrl={imageURL}
+          name={name}
+          position={position}
           pressHandler={() =>
             navigation.navigate('IndividualDetails', {
               userId: '86',
-              name: 'Mr. Y',
+              name: 'Mr. X',
             })
           }
-        />
-        <CustomButton
-          variant="secondary"
-          title="Go to Home"
-          onPress={() => navigation.navigate('Home')}
-        />
-        <CustomButton
-          variant="secondary"
-          title="Go to Teacher1 Details"
-          onPress={() => {}}
         />
       </View>
     </ScreenLayout>
@@ -44,4 +31,11 @@ const TeachersScreen = ({navigation}: TeacherScreenProps) => {
 
 export default TeachersScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  body: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    // padding: 120,
+  },
+});
