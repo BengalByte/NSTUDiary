@@ -79,6 +79,7 @@ const HeaderView = (props: HeaderViewProps) => {
 const AppNavigator = () => {
   const {Rp} = useResponsiveSize();
   const currentTheme = useTypedSelector(state => state.theme.currentTheme);
+  const token = useTypedSelector(state => state.token.token);
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -102,7 +103,7 @@ const AppNavigator = () => {
             />
           ),
         }}>
-        {false ? (
+        {!token ? (
           <>
             <Stack.Screen
               name="SignIn"

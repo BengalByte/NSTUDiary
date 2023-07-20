@@ -9,6 +9,13 @@ import {mockUser, usersData} from 'api/mockData';
 import CustomInput from 'ui/CustomInput';
 import useResponsiveSize from 'hooks/useResponsiveSize';
 import {matchedTexts} from 'utils/search';
+import {
+  Layout,
+  SlideInLeft,
+  SlideInRight,
+  SlideOutLeft,
+  SlideOutRight,
+} from 'react-native-reanimated';
 
 const TeachersScreen = ({navigation}: TeacherScreenProps) => {
   const {bio, facebook, imageURL, mail, name, phone, position, userId} =
@@ -16,21 +23,6 @@ const TeachersScreen = ({navigation}: TeacherScreenProps) => {
   const {Rp} = useResponsiveSize();
   const [users, setUsers] = useState(usersData);
   const [searchText, setSearchText] = useState('');
-
-  // const matchedTexts = (textArray: string[], searchText: string) => {
-  //   let matchedResults: string[] = [];
-  //   const regex = new RegExp(searchText, 'gi');
-  //   if (searchText === '') {
-  //     return textArray;
-  //   } else {
-  //     for (let i = 0; i < textArray.length; i++) {
-  //       if (regex.test(textArray[i])) {
-  //         matchedResults.push(textArray[i]);
-  //       }
-  //     }
-  //     return matchedResults;
-  //   }
-  // };
 
   const filteredUsers = users.filter(user => {
     const valuesToSearch = [user.name, user.email, user.phone, user.bio];
@@ -50,6 +42,17 @@ const TeachersScreen = ({navigation}: TeacherScreenProps) => {
         {filteredUsers.map((item, index) => {
           return (
             <IndividualCard
+              animatedProps={{
+                layout: Layout,
+                entering:
+                  (index + 1) % 2 === 0
+                    ? SlideInLeft.duration(300)
+                    : SlideInRight.duration(300),
+                exiting:
+                  (index + 1) % 2 === 0
+                    ? SlideOutLeft.duration(300)
+                    : SlideOutRight.duration(300),
+              }}
               key={item._id}
               style={{marginTop: Rp(20)}}
               imageUrl={imageURL}

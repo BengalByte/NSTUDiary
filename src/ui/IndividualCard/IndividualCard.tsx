@@ -4,19 +4,25 @@ import {
   TouchableOpacity,
   View,
   ViewStyle,
+  ViewProps,
 } from 'react-native';
 import React from 'react';
 import Avatar from 'ui/Avatar';
 import useResponsiveSize from 'hooks/useResponsiveSize';
 import {useTypedSelector} from 'store/store';
 import {theme} from 'utils/theme';
-
+import Animated, {
+  AnimateProps,
+  AnimatedStyleProp,
+} from 'react-native-reanimated';
 type Props = {
   pressHandler: () => void;
   imageUrl: string;
   name: string;
   position: string;
   style?: ViewStyle;
+  // animatedProps?: AnimatedStyleProp<View>;
+  animatedProps?: AnimateProps<ViewProps>;
 };
 
 const IndividualCard = ({
@@ -25,6 +31,7 @@ const IndividualCard = ({
   name,
   position,
   style,
+  animatedProps,
 }: Props) => {
   const {Rp} = useResponsiveSize();
   const currentTheme = useTypedSelector(state => state.theme.currentTheme);
@@ -58,16 +65,18 @@ const IndividualCard = ({
   });
 
   return (
-    <TouchableOpacity
-      activeOpacity={0.8}
-      style={[styles.body, style]}
-      onPress={pressHandler}>
-      <Avatar size={50} imageUrl={imageUrl} />
-      <View style={styles.textBody}>
-        <Text style={styles.name}>{name}</Text>
-        <Text style={styles.position}>{position}</Text>
-      </View>
-    </TouchableOpacity>
+    <Animated.View {...animatedProps}>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        style={[styles.body, style]}
+        onPress={pressHandler}>
+        <Avatar size={50} imageUrl={imageUrl} />
+        <View style={styles.textBody}>
+          <Text style={styles.name}>{name}</Text>
+          <Text style={styles.position}>{position}</Text>
+        </View>
+      </TouchableOpacity>
+    </Animated.View>
   );
 };
 
