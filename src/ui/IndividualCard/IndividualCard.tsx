@@ -1,4 +1,10 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+} from 'react-native';
 import React from 'react';
 import Avatar from 'ui/Avatar';
 import useResponsiveSize from 'hooks/useResponsiveSize';
@@ -10,9 +16,16 @@ type Props = {
   imageUrl: string;
   name: string;
   position: string;
+  style?: ViewStyle;
 };
 
-const IndividualCard = ({pressHandler, imageUrl, name, position}: Props) => {
+const IndividualCard = ({
+  pressHandler,
+  imageUrl,
+  name,
+  position,
+  style,
+}: Props) => {
   const {Rp} = useResponsiveSize();
   const currentTheme = useTypedSelector(state => state.theme.currentTheme);
   const styles = StyleSheet.create({
@@ -47,7 +60,7 @@ const IndividualCard = ({pressHandler, imageUrl, name, position}: Props) => {
   return (
     <TouchableOpacity
       activeOpacity={0.8}
-      style={styles.body}
+      style={[styles.body, style]}
       onPress={pressHandler}>
       <Avatar size={50} imageUrl={imageUrl} />
       <View style={styles.textBody}>

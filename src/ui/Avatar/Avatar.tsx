@@ -1,13 +1,14 @@
-import {Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {Image, StyleSheet, TouchableOpacity, ViewStyle} from 'react-native';
 import React from 'react';
 import useResponsiveSize from 'hooks/useResponsiveSize';
 
 type AvatarProps = {
   size?: number;
   imageUrl: string;
+  style?: ViewStyle;
 };
 
-const Avatar: React.FC<AvatarProps> = ({imageUrl, size}) => {
+const Avatar: React.FC<AvatarProps> = ({imageUrl, style, size}) => {
   const {Rp} = useResponsiveSize();
   const styles = StyleSheet.create({
     avatar: {
@@ -17,7 +18,7 @@ const Avatar: React.FC<AvatarProps> = ({imageUrl, size}) => {
     },
   });
   return (
-    <TouchableOpacity activeOpacity={0.9}>
+    <TouchableOpacity activeOpacity={0.9} style={style}>
       <Image style={styles.avatar} source={{uri: imageUrl}} />
     </TouchableOpacity>
   );

@@ -11,9 +11,8 @@ import {useTypedSelector} from 'store/store';
 import {theme} from 'utils/theme';
 
 const IndividualDetailScreen = ({route, navigation}: DetailsScreenProps) => {
-  // const {userId, name} = route.params;
-  const {userId, name, imageURL, bio, position, phone, mail, facebook} =
-    mockUser;
+  const {name} = route.params;
+  const {userId, imageURL, bio, position, phone, mail, facebook} = mockUser;
   const currentTheme = useTypedSelector(state => state.theme.currentTheme);
   const {Rp} = useResponsiveSize();
   console.log(mockUser);
@@ -61,7 +60,7 @@ const IndividualDetailScreen = ({route, navigation}: DetailsScreenProps) => {
   return (
     <ScreenLayout>
       <View style={styles.body}>
-        <Avatar imageUrl={imageURL} />
+        <Avatar style={{marginTop: Rp(30)}} imageUrl={imageURL} />
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.userName}>{userId}</Text>
         <Text style={styles.bio}>{bio}</Text>

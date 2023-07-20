@@ -9,9 +9,15 @@ let textArray = [
 ];
 let searchText = 'Ab';
 
+const letterAndNumberText = (text: string) => {
+  // Remove all characters that are not numbers or letters
+  return text.replace(/[^a-zA-Z0-9]/g, '');
+};
+
 export const matchedTexts = (textArray: string[], searchText: string) => {
   let matchedResults: string[] = [];
-  const regex = new RegExp(searchText, 'g');
+  let cleanText = letterAndNumberText(searchText);
+  const regex = new RegExp(cleanText.trim(), 'gi');
   if (searchText === '') {
     return textArray;
   } else {
@@ -24,4 +30,3 @@ export const matchedTexts = (textArray: string[], searchText: string) => {
     return matchedResults;
   }
 };
-console.log(matchedTexts(textArray, searchText));
