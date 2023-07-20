@@ -25,19 +25,20 @@ const IndividualDetailScreen = ({route, navigation}: DetailsScreenProps) => {
       // paddingVertical: 150,
     },
     name: {
+      marginTop: Rp(20),
       fontSize: Rp(55),
       fontWeight: 'bold',
       color: theme[currentTheme].textColor,
     },
     position: {
+      width: Rp(900),
       fontSize: Rp(40),
-      alignSelf: 'flex-start',
       textAlign: 'left',
       color: theme[currentTheme].textColor,
     },
     title: {
       fontSize: Rp(35),
-      alignSelf: 'flex-start',
+      width: Rp(900),
       fontWeight: 'bold',
       marginTop: Rp(30),
       color: theme[currentTheme].textColor,
@@ -47,6 +48,7 @@ const IndividualDetailScreen = ({route, navigation}: DetailsScreenProps) => {
       textAlign: 'justify',
       marginTop: Rp(30),
       color: theme[currentTheme].textColor,
+      width: Rp(900),
     },
     userName: {
       fontSize: Rp(40),
@@ -60,7 +62,7 @@ const IndividualDetailScreen = ({route, navigation}: DetailsScreenProps) => {
   return (
     <ScreenLayout>
       <View style={styles.body}>
-        <Avatar style={{marginTop: Rp(30)}} imageUrl={imageURL} />
+        <Avatar style={{marginTop: Rp(80)}} imageUrl={imageURL} />
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.userName}>{userId}</Text>
         <Text style={styles.bio}>{bio}</Text>

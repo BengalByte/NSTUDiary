@@ -1,46 +1,80 @@
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import ToggleTheme from 'ui/ToggleTheme';
 import CustomButton from 'ui/CustomButton';
 import {HomeScreenProps} from 'navigation/AppNavigator';
 import ScreenLayout from 'screens/ScreenLayout';
+import Card from 'ui/Card';
+import useResponsiveSize from 'hooks/useResponsiveSize';
 
 const HomeScreen = ({navigation}: HomeScreenProps) => {
+  const {Rp} = useResponsiveSize();
   return (
     <ScreenLayout>
       <ScrollView
         contentContainerStyle={{
-          // flex: 1,
-          alignItems: 'center',
-          // justifyContent: 'space-evenly',
+          marginTop: Rp(80),
+          flex: 1,
+          flexDirection: 'row',
+          gap: Rp(60),
+          flexWrap: 'wrap',
+          justifyContent: 'space-evenly',
         }}>
-        <CustomButton
-          onPress={() => {
-            console.log('first');
-          }}
-          variant="primary"
-          title="This is Custom"
-        />
-        <CustomButton
-          title="Teachers"
-          onPress={() => navigation.navigate('Teacher')}
-          variant="primary"
-        />
-        <CustomButton
-          title="Staff"
-          onPress={() => navigation.navigate('Staff')}
-          variant="primary"
-        />
-        <CustomButton
-          title="Notice"
-          onPress={() => navigation.navigate('Notice')}
-          variant="primary"
-        />
-        <CustomButton
-          title="Resource"
-          onPress={() => navigation.navigate('Resource')}
-          variant="primary"
-        />
+        <Card
+          style={{
+            width: Rp(380),
+            height: Rp(380),
+          }}>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}
+            onPress={() => navigation.navigate('Resource')}>
+            <Text style={{fontSize: Rp(50)}}>Resource</Text>
+          </TouchableOpacity>
+        </Card>
+        <Card
+          style={{
+            width: Rp(380),
+            height: Rp(380),
+          }}>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}
+            onPress={() => navigation.navigate('Teacher')}>
+            <Text style={{fontSize: Rp(50)}}>Teacher</Text>
+          </TouchableOpacity>
+        </Card>
+
+        <Card
+          style={{
+            width: Rp(380),
+            height: Rp(380),
+          }}>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}
+            onPress={() => navigation.navigate('Staff')}>
+            <Text style={{fontSize: Rp(50)}}>Staff</Text>
+          </TouchableOpacity>
+        </Card>
+        <Card
+          style={{
+            width: Rp(380),
+            height: Rp(380),
+          }}>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}
+            onPress={() => navigation.navigate('Notice')}>
+            <Text style={{fontSize: Rp(50)}}>Notice</Text>
+          </TouchableOpacity>
+        </Card>
       </ScrollView>
     </ScreenLayout>
   );

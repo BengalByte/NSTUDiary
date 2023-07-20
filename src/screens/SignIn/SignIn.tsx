@@ -1,4 +1,4 @@
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import ScreenLayout from 'screens/ScreenLayout';
 import CustomTextInput from 'ui/CustomTextInput';
@@ -15,7 +15,7 @@ const SignIn = () => {
   const styles = StyleSheet.create({
     body: {
       flex: 1,
-      justifyContent: 'center',
+      justifyContent: 'flex-start',
       alignItems: 'center',
     },
   });

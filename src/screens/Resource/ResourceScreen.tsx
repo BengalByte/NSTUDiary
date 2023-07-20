@@ -14,7 +14,6 @@ const ResourceScreen = ({navigation}: ResourceScreenProps) => {
           justifyContent: 'space-evenly',
           padding: 120,
         }}>
-        <Text>This is Resource Screen</Text>
         <CustomButton
           variant="secondary"
           title="Go to Home"
