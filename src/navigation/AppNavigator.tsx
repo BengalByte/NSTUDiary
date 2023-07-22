@@ -17,6 +17,9 @@ import ToggleTheme from 'ui/ToggleTheme';
 import Rp from '../hooks/useResponsiveSize';
 import useResponsiveSize from '@hooks/useResponsiveSize';
 import SignIn from 'screens/SignIn/SignIn';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import CustomIcon from 'components/CustomIcon';
+import ProfileScreen from 'screens/Profile';
 
 type RootStackParamList = {
   Home: undefined;
@@ -27,6 +30,13 @@ type RootStackParamList = {
   Notice: undefined;
   SignIn: undefined;
 };
+
+type RootTabParamList = {
+  Department: undefined;
+  Profile: undefined;
+};
+
+const Tab = createBottomTabNavigator<RootTabParamList>();
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 export type HomeScreenProps = NativeStackScreenProps<
@@ -76,80 +86,110 @@ const HeaderView = (props: HeaderViewProps) => {
   );
 };
 
-const AppNavigator = () => {
+const DeptStackScreen = () => {
   const {Rp} = useResponsiveSize();
   const currentTheme = useTypedSelector(state => state.theme.currentTheme);
   const token = useTypedSelector(state => state.token.token);
   return (
+    <Stack.Navigator
+      // initialRouteName="Home"
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: theme[currentTheme].base,
+        },
+        headerTintColor: theme[currentTheme].textColor,
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+        headerTitleAlign: 'center',
+        headerRight: () => <ToggleTheme />,
+        animation: 'slide_from_right',
+        headerTitle: props => (
+          <HeaderView
+            size={Rp(110)}
+            color={theme[currentTheme].textColor}
+            {...props}
+          />
+        ),
+      }}>
+      {!token ? (
+        <>
+          <Stack.Screen
+            name="SignIn"
+            options={{
+              title: 'Sign In',
+            }}
+            component={SignIn}
+          />
+        </>
+      ) : (
+        <>
+          <Stack.Screen
+            name="Home"
+            options={{
+              title: 'Home',
+            }}
+            component={HomeScreen}
+          />
+          <Stack.Screen
+            name="Teacher"
+            options={{title: 'Teachers'}}
+            component={TeachersScreen}
+          />
+          <Stack.Screen
+            name="Staff"
+            options={{title: 'Staffs'}}
+            component={StaffScreen}
+          />
+          <Stack.Screen
+            name="Notice"
+            options={{title: 'Notice Board'}}
+            component={NoticeScreen}
+          />
+          <Stack.Screen
+            name="Resource"
+            options={{title: 'Resources'}}
+            component={ResourceScreen}
+          />
+          <Stack.Screen
+            name="IndividualDetails"
+            component={IndividualDetailScreen}
+            options={({navigation, route}) => ({title: route.params.name})}
+          />
+        </>
+      )}
+    </Stack.Navigator>
+  );
+};
+
+const AppNavigator = () => {
+  return (
     <NavigationContainer>
-      <Stack.Navigator
-        // initialRouteName="Home"
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: theme[currentTheme].base,
+      <Tab.Navigator
+        screenOptions={({route}) => ({
+          tabBarIcon: ({focused, color, size}) => {
+            let iconName;
+
+            if (route.name === 'Department') {
+              iconName = focused ? 'day' : 'night';
+            } else if (route.name === 'Profile') {
+              iconName = focused ? 'day' : 'night';
+            }
+
+            // You can return any component that you like here!
+            return <CustomIcon name={iconName} size={size} color={color} />;
           },
-          headerTintColor: theme[currentTheme].textColor,
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
-          headerTitleAlign: 'center',
-          headerRight: () => <ToggleTheme />,
-          animation: 'slide_from_right',
-          headerTitle: props => (
-            <HeaderView
-              size={Rp(110)}
-              color={theme[currentTheme].textColor}
-              {...props}
-            />
-          ),
-        }}>
-        {!token ? (
-          <>
-            <Stack.Screen
-              name="SignIn"
-              options={{
-                title: 'Sign In',
-              }}
-              component={SignIn}
-            />
-          </>
-        ) : (
-          <>
-            <Stack.Screen
-              name="Home"
-              options={{
-                title: 'Home',
-              }}
-              component={HomeScreen}
-            />
-            <Stack.Screen
-              name="Teacher"
-              options={{title: 'Teachers'}}
-              component={TeachersScreen}
-            />
-            <Stack.Screen
-              name="Staff"
-              options={{title: 'Staffs'}}
-              component={StaffScreen}
-            />
-            <Stack.Screen
-              name="Notice"
-              options={{title: 'Notice Board'}}
-              component={NoticeScreen}
-            />
-            <Stack.Screen
-              name="Resource"
-              options={{title: 'Resources'}}
-              component={ResourceScreen}
-            />
-            <Stack.Screen
-              name="IndividualDetails"
-              component={IndividualDetailScreen}
-              options={({navigation, route}) => ({title: route.params.name})}
-            />
-          </>
-        )}
-      </Stack.Navigator>
+          tabBarActiveTintColor: 'tomato',
+          tabBarInactiveTintColor: 'gray',
+          headerShown: false,
+        })}>
+        <Tab.Screen name="Department" component={DeptStackScreen} />
+        <Tab.Screen
+          name="Profile"
+          component={ProfileScreen}
+          options={{tabBarBadge: 3}}
+        />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 };

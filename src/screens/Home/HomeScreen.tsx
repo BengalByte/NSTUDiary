@@ -12,9 +12,12 @@ import {HomeScreenProps} from 'navigation/AppNavigator';
 import ScreenLayout from 'screens/ScreenLayout';
 import Card from 'ui/Card';
 import useResponsiveSize from 'hooks/useResponsiveSize';
+import {theme} from 'utils/theme';
+import {useTypedSelector} from 'store/store';
 
 const HomeScreen = ({navigation}: HomeScreenProps) => {
   const {Rp} = useResponsiveSize();
+  const currentTheme = useTypedSelector(state => state.theme.currentTheme);
   return (
     <ScreenLayout>
       <ScrollView
@@ -35,7 +38,10 @@ const HomeScreen = ({navigation}: HomeScreenProps) => {
             activeOpacity={0.5}
             style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}
             onPress={() => navigation.navigate('Resource')}>
-            <Text style={{fontSize: Rp(50)}}>Resource</Text>
+            <Text
+              style={{fontSize: Rp(50), color: theme[currentTheme].textColor}}>
+              Resource
+            </Text>
           </TouchableOpacity>
         </Card>
         <Card
@@ -47,7 +53,10 @@ const HomeScreen = ({navigation}: HomeScreenProps) => {
             activeOpacity={0.5}
             style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}
             onPress={() => navigation.navigate('Teacher')}>
-            <Text style={{fontSize: Rp(50)}}>Teacher</Text>
+            <Text
+              style={{fontSize: Rp(50), color: theme[currentTheme].textColor}}>
+              Teacher
+            </Text>
           </TouchableOpacity>
         </Card>
 
@@ -60,7 +69,10 @@ const HomeScreen = ({navigation}: HomeScreenProps) => {
             activeOpacity={0.5}
             style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}
             onPress={() => navigation.navigate('Staff')}>
-            <Text style={{fontSize: Rp(50)}}>Staff</Text>
+            <Text
+              style={{fontSize: Rp(50), color: theme[currentTheme].textColor}}>
+              Staff
+            </Text>
           </TouchableOpacity>
         </Card>
         <Card
@@ -72,7 +84,10 @@ const HomeScreen = ({navigation}: HomeScreenProps) => {
             activeOpacity={0.5}
             style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}
             onPress={() => navigation.navigate('Notice')}>
-            <Text style={{fontSize: Rp(50)}}>Notice</Text>
+            <Text
+              style={{fontSize: Rp(50), color: theme[currentTheme].textColor}}>
+              Notice
+            </Text>
           </TouchableOpacity>
         </Card>
       </ScrollView>
