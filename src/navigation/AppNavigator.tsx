@@ -20,6 +20,7 @@ import SignIn from 'screens/SignIn/SignIn';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import CustomIcon from 'components/CustomIcon';
 import ProfileScreen from 'screens/Profile';
+import SearchScreen from 'screens/Search/SearchScreen';
 
 type RootStackParamList = {
   Home: undefined;
@@ -34,6 +35,7 @@ type RootStackParamList = {
 type RootTabParamList = {
   Department: undefined;
   Profile: undefined;
+  Search: undefined;
 };
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
@@ -174,6 +176,8 @@ const AppNavigator = () => {
               iconName = focused ? 'day' : 'night';
             } else if (route.name === 'Profile') {
               iconName = focused ? 'day' : 'night';
+            } else if (route.name === 'Search') {
+              iconName = focused ? 'day' : 'night';
             }
 
             // You can return any component that you like here!
@@ -184,6 +188,8 @@ const AppNavigator = () => {
           headerShown: false,
         })}>
         <Tab.Screen name="Department" component={DeptStackScreen} />
+
+        <Tab.Screen name="Search" component={SearchScreen} />
         <Tab.Screen
           name="Profile"
           component={ProfileScreen}
