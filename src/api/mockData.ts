@@ -76,4 +76,12 @@ export const usersData = [
     phone: '+1 (978) 413-3592',
     bio: 'Commodo voluptate deserunt aliquip labore in cillum et laboris sit cupidatat veniam eu. Nostrud elit enim eiusmod incididunt voluptate fugiat consequat aute officia.',
   },
+  {
+    _id: '64b7ff534f24bc934c55bdd0d',
+    picture: 'https://randomuser.me/api/portraits/lego/4.jpg',
+    name: 'Koroles Benson',
+    email: 'doloresbenson@rodeocean.com',
+    phone: '+1 (978) 413-3592',
+    bio: 'Commodo voluptate deserunt aliquip labore in cillum et laboris sit cupidatat veniam eu. Nostrud elit enim eiusmod incididunt voluptate fugiat consequat aute officia.',
+  },
 ];

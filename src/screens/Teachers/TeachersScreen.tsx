@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import {TeacherScreenProps} from 'navigation/AppNavigator';
 import CustomButton from 'ui/CustomButton';
@@ -39,34 +39,43 @@ const TeachersScreen = ({navigation}: TeacherScreenProps) => {
           variant="primary"
           placeholder="Search User"
         />
-        {filteredUsers.map((item, index) => {
-          return (
-            <IndividualCard
-              animatedProps={{
-                layout: Layout,
-                entering:
-                  (index + 1) % 2 === 0
-                    ? SlideInLeft.duration(300)
-                    : SlideInRight.duration(300),
-                exiting:
-                  (index + 1) % 2 === 0
-                    ? SlideOutLeft.duration(300)
-                    : SlideOutRight.duration(300),
-              }}
-              key={item._id}
-              style={{marginTop: Rp(20)}}
-              imageUrl={imageURL}
-              name={item.name}
-              position={item.email}
-              pressHandler={() =>
-                navigation.navigate('IndividualDetails', {
-                  userId: item._id,
-                  name: item.name,
-                })
-              }
-            />
-          );
-        })}
+        <Text style={{alignSelf: 'flex-start', marginLeft: Rp(50)}}>
+          {filteredUsers.length} results found...
+        </Text>
+        <ScrollView
+          scrollEnabled
+          scrollsToTop
+          showsVerticalScrollIndicator={false}>
+          {filteredUsers.map((item, index) => {
+            return (
+              <IndividualCard
+                animatedProps={{
+                  layout: Layout,
+                  entering:
+                    (index + 1) % 2 === 0
+                      ? SlideInLeft.duration(300)
+                      : SlideInRight.duration(300),
+                  exiting:
+                    (index + 1) % 2 === 0
+                      ? SlideOutLeft.duration(300)
+                      : SlideOutRight.duration(300),
+                }}
+                key={item._id}
+                style={{marginTop: Rp(20)}}
+                imageUrl={imageURL}
+                name={item.name}
+                position={item.email}
+                pressHandler={() =>
+                  navigation.navigate('IndividualDetails', {
+                    userId: item._id,
+                    name: item.name,
+                  })
+                }
+              />
+            );
+          })}
+          <View style={{marginBottom: Rp(230)}}></View>
+        </ScrollView>
       </View>
     </ScreenLayout>
   );

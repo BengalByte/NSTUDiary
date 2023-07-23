@@ -26,7 +26,7 @@ const StaffScreen = ({navigation}: StaffScreenProps) => {
           title="Go to Staff1 Details"
           onPress={() =>
             navigation.navigate('IndividualDetails', {
-              userId: 86,
+              userId: '86',
               name: 'Mr. X',
             })
           }

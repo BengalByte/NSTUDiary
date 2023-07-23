@@ -4,16 +4,17 @@ import {mockUser} from 'api/mockData';
 import Avatar from 'ui/Avatar';
 import IndividualDetailScreen from 'screens/IndividualDetail/IndividualDetailScreen';
 import ProfileDataCard from 'components/ProfileDataCard';
+import {theme} from 'utils/theme';
+import {useTypedSelector} from 'store/store';
+import ScreenLayout from 'screens/ScreenLayout';
 
 type Props = {};
 
 const ProfileScreen = (props: Props) => {
-  const {name, bio, facebook, imageURL, mail, phone, position, userId} =
-    mockUser;
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <ScreenLayout>
       <ProfileDataCard />
-    </SafeAreaView>
+    </ScreenLayout>
   );
 };
 

@@ -113,6 +113,7 @@ const DeptStackScreen = () => {
             {...props}
           />
         ),
+        // headerShown: false,
       }}>
       {!token ? (
         <>
@@ -164,7 +165,32 @@ const DeptStackScreen = () => {
   );
 };
 
+type TabBarViewProps = {
+  color: string;
+  size: number;
+  // tintColor: string;
+};
+
+const TabBarView = (props: TabBarViewProps) => {
+  console.log('The Props', props);
+  return (
+    <View
+      style={{
+        height: props.size,
+        backgroundColor: props.color,
+        borderTopRightRadius: 10,
+        borderTopLeftRadius: 10,
+        // position: 'absolute',
+        shadowColor: 'black',
+
+        elevation: 10,
+      }}></View>
+  );
+};
+
 const AppNavigator = () => {
+  const currentTheme = useTypedSelector(state => state.theme.currentTheme);
+  const {Rp} = useResponsiveSize();
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -186,6 +212,14 @@ const AppNavigator = () => {
           tabBarActiveTintColor: 'tomato',
           tabBarInactiveTintColor: 'gray',
           headerShown: false,
+          tabBarStyle: {
+            backgroundColor: 'transparent',
+            position: 'absolute',
+            borderTopColor: 'transparent',
+          },
+          tabBarBackground: () => (
+            <TabBarView size={100} color={theme[currentTheme].base10} />
+          ),
         })}>
         <Tab.Screen name="Department" component={DeptStackScreen} />
 
@@ -193,7 +227,7 @@ const AppNavigator = () => {
         <Tab.Screen
           name="Profile"
           component={ProfileScreen}
-          options={{tabBarBadge: 3}}
+          // options={{tabBarBadge: 3}}
         />
       </Tab.Navigator>
     </NavigationContainer>
