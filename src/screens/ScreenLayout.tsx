@@ -1,4 +1,4 @@
-import {StyleSheet, View} from 'react-native';
+import {SafeAreaView, StyleSheet, View} from 'react-native';
 import React from 'react';
 import useResponsiveSize from 'hooks/useResponsiveSize';
 import {theme} from 'utils/theme';
@@ -20,7 +20,7 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({children}) => {
       flex: 1,
     },
   });
-  return <View style={styles.layout}>{children}</View>;
+  return <SafeAreaView style={styles.layout}>{children}</SafeAreaView>;
 };
 
 export default ScreenLayout;

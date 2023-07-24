@@ -22,7 +22,7 @@ import CustomIcon from 'components/CustomIcon';
 import ProfileScreen from 'screens/Profile';
 import SearchScreen from 'screens/Search/SearchScreen';
 
-type RootStackParamList = {
+type DeptStackParamList = {
   Home: undefined;
   IndividualDetails: {userId: string; name: string};
   Teacher: undefined;
@@ -40,60 +40,42 @@ type RootTabParamList = {
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const DeptStack = createNativeStackNavigator<DeptStackParamList>();
 export type HomeScreenProps = NativeStackScreenProps<
-  RootStackParamList,
+  DeptStackParamList,
   'Home'
 >;
 export type SignInScreenProps = NativeStackScreenProps<
-  RootStackParamList,
+  DeptStackParamList,
   'SignIn'
 >;
 export type TeacherScreenProps = NativeStackScreenProps<
-  RootStackParamList,
+  DeptStackParamList,
   'Teacher'
 >;
 export type StaffScreenProps = NativeStackScreenProps<
-  RootStackParamList,
+  DeptStackParamList,
   'Staff'
 >;
 export type NoticeScreenProps = NativeStackScreenProps<
-  RootStackParamList,
+  DeptStackParamList,
   'Notice'
 >;
 export type ResourceScreenProps = NativeStackScreenProps<
-  RootStackParamList,
+  DeptStackParamList,
   'Resource'
 >;
 export type DetailsScreenProps = NativeStackScreenProps<
-  RootStackParamList,
+  DeptStackParamList,
   'IndividualDetails'
 >;
-
-type HeaderViewProps = {
-  children: string;
-  color: string;
-  size: number;
-  // tintColor: string;
-};
-
-const HeaderView = (props: HeaderViewProps) => {
-  console.log('The Props', props);
-  return (
-    <View style={{height: props.size, justifyContent: 'center'}}>
-      <Text style={{fontSize: props.size / 2, color: props.color}}>
-        {props.children}
-      </Text>
-    </View>
-  );
-};
 
 const DeptStackScreen = () => {
   const {Rp} = useResponsiveSize();
   const currentTheme = useTypedSelector(state => state.theme.currentTheme);
   const token = useTypedSelector(state => state.token.token);
   return (
-    <Stack.Navigator
+    <DeptStack.Navigator
       // initialRouteName="Home"
       screenOptions={{
         headerStyle: {
@@ -117,7 +99,7 @@ const DeptStackScreen = () => {
       }}>
       {!token ? (
         <>
-          <Stack.Screen
+          <DeptStack.Screen
             name="SignIn"
             options={{
               title: 'Sign In',
@@ -127,41 +109,59 @@ const DeptStackScreen = () => {
         </>
       ) : (
         <>
-          <Stack.Screen
+          <DeptStack.Screen
             name="Home"
             options={{
               title: 'Home',
             }}
             component={HomeScreen}
           />
-          <Stack.Screen
+          <DeptStack.Screen
             name="Teacher"
             options={{title: 'Teachers'}}
             component={TeachersScreen}
           />
-          <Stack.Screen
+          <DeptStack.Screen
             name="Staff"
             options={{title: 'Staffs'}}
             component={StaffScreen}
           />
-          <Stack.Screen
+          <DeptStack.Screen
             name="Notice"
             options={{title: 'Notice Board'}}
             component={NoticeScreen}
           />
-          <Stack.Screen
+          <DeptStack.Screen
             name="Resource"
             options={{title: 'Resources'}}
             component={ResourceScreen}
           />
-          <Stack.Screen
+          <DeptStack.Screen
             name="IndividualDetails"
             component={IndividualDetailScreen}
             options={({navigation, route}) => ({title: route.params.name})}
           />
         </>
       )}
-    </Stack.Navigator>
+    </DeptStack.Navigator>
+  );
+};
+
+type HeaderViewProps = {
+  children: string;
+  color: string;
+  size: number;
+  // tintColor: string;
+};
+
+const HeaderView = (props: HeaderViewProps) => {
+  console.log('The Props', props);
+  return (
+    <View style={{height: props.size, justifyContent: 'center'}}>
+      <Text style={{fontSize: props.size / 2, color: props.color}}>
+        {props.children}
+      </Text>
+    </View>
   );
 };
 
@@ -178,14 +178,37 @@ const TabBarView = (props: TabBarViewProps) => {
       style={{
         height: props.size,
         backgroundColor: props.color,
-        borderTopRightRadius: 10,
-        borderTopLeftRadius: 10,
+        borderTopRightRadius: 20,
+        borderTopLeftRadius: 20,
         // position: 'absolute',
-        shadowColor: 'black',
-
-        elevation: 10,
+        // shadowColor: 'black',
+        // elevation: 10,
       }}></View>
   );
+};
+
+type SearchStackParamList = {
+  Search: undefined;
+  IndividualList: undefined;
+  IndividualDetails: undefined;
+};
+
+const SearchStack = createNativeStackNavigator<SearchStackParamList>();
+export type SearchScreenProps = NativeStackScreenProps<
+  SearchStackParamList,
+  'Search'
+>;
+export type IndividualListScreenProps = NativeStackScreenProps<
+  SearchStackParamList,
+  'IndividualList'
+>;
+export type IndividualDetailsScreenProps = NativeStackScreenProps<
+  SearchStackParamList,
+  'IndividualDetails'
+>;
+
+const SearchStackScreen = () => {
+  return <View></View>;
 };
 
 const AppNavigator = () => {
