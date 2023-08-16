@@ -1,29 +1,25 @@
-import React from 'react';
-import {setColor} from '@store/slices/ColorSlice';
-import {Text, View, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
-import {useAppDispatch, useTypedSelector} from '@store/store';
+import { setColor } from '@store/slices/ColorSlice';
+import { useAppDispatch, useTypedSelector } from '@store/store';
 import ToggleTheme from '@ui/ToggleTheme';
-import {theme} from '@utils/theme';
-import {
-  useGetPostByIDQuery,
-  useGetPostsQuery,
-  useGetUsersQuery,
-} from 'api/users';
+import { theme } from '@utils/theme';
+import { useGetPostByIDQuery } from 'api/users';
+import React from 'react';
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 const HomeScreenNew = () => {
   const dispatch = useAppDispatch();
 
-  const currentTheme = useTypedSelector(state => state.theme.currentTheme);
-  const color = useTypedSelector(state => state.color.value);
+  const currentTheme = useTypedSelector((state) => state.theme.currentTheme);
+  const color = useTypedSelector((state) => state.color.value);
 
   const themeStyle = {
-    backgroundColor: theme[currentTheme].base,
-    color: theme[currentTheme].secondaryColor,
+    backgroundColor: theme[currentTheme].base.secondary.dark,
+    color: theme[currentTheme].base.primary.dark,
   };
   // Fetch Data:
   // const {data, isLoading, error} = useGetUsersQuery();
   // const {data: posts, error, isLoading} = useGetPostsQuery();
-  const {data: post, error, isLoading} = useGetPostByIDQuery(1);
+  const { data: post } = useGetPostByIDQuery(1);
 
   // Data stored in the store. And can be fetched from other components
   // const postData = useTypedSelector(state => state.posts.data);
@@ -33,16 +29,14 @@ const HomeScreenNew = () => {
     <View style={[themeStyle]}>
       <ToggleTheme />
       <Text>Current Theme: {currentTheme}</Text>
-      <TouchableOpacity
-        onPress={() => dispatch(setColor())}
-        style={styles.button}>
-        <Text style={{fontSize: 20}}>Generate Random Color</Text>
+      <TouchableOpacity onPress={() => dispatch(setColor())} style={styles.button}>
+        <Text style={{ fontSize: 20 }}>Generate Random Color</Text>
       </TouchableOpacity>
       <FlatList
-        keyExtractor={item => item}
+        keyExtractor={(item) => item}
         data={color}
-        style={{marginTop: 15}}
-        renderItem={({item}) => {
+        style={{ marginTop: 15 }}
+        renderItem={({ item }) => {
           return (
             <View
               style={{

@@ -1,0 +1,33 @@
+{
+  "env": {
+    "es2021": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "eslint-config-prettier"
+  ],
+  "globals": {
+    "React": "readonly"
+  },
+  "overrides": [],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react", "@typescript-eslint"],
+  "settings": {
+    "react": {
+      "version": "18.2.0"
+    }
+  },
+  "rules": {
+    "react/prop-types": ["error", {"ignore": ["navigation"]}],
+    // "no-unused-vars": [1, { "args": "after-used", "argsIgnorePattern": "^_" }]
+    "no-unused-vars": 0 // As example: Will never bug you about unused variables again
+  }
+}
