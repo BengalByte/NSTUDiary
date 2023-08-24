@@ -2,7 +2,10 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Provider} from 'react-redux';
 import store from 'store/store';
-import AppNavigator from 'navigation/AppNavigator';
+import 'react-native-gesture-handler';
+import {RootDrawer} from 'navigation/NewNavigator';
+import HomeScreen from 'screens/Test/HomeScreen';
+// import AppNavigator from 'navigation/AppNavigator';
 
 interface User {
   name: string;
@@ -15,7 +18,10 @@ interface User {
 function App(): JSX.Element {
   return (
     <Provider store={store}>
-      <AppNavigator />
+      <View>
+        <RootDrawer />
+        {/* <HomeScreen /> */}
+      </View>
     </Provider>
   );
 }
