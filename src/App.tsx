@@ -5,6 +5,7 @@ import store from 'store/store';
 import 'react-native-gesture-handler';
 import {RootDrawer} from 'navigation/NewNavigator';
 import HomeScreen from 'screens/Test/HomeScreen';
+import {NavigationContainer} from '@react-navigation/native';
 // import AppNavigator from 'navigation/AppNavigator';
 
 interface User {
@@ -18,10 +19,10 @@ interface User {
 function App(): JSX.Element {
   return (
     <Provider store={store}>
-      <View>
+      <NavigationContainer>
         <RootDrawer />
         {/* <HomeScreen /> */}
-      </View>
+      </NavigationContainer>
     </Provider>
   );
 }
