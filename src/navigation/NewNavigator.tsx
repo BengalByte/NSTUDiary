@@ -78,18 +78,53 @@ const ProfileScreenStack = () => {
   );
 };
 
+const BottomTabData = [
+  {label: 'Home', name: 'HomeStack', component: HomeScreenStack},
+  {label: 'Dept', name: 'DeptStack', component: DeptScreenStack},
+  {label: 'Search', name: 'SearchStack', component: SearchScreenStack},
+  {label: 'Profile', name: 'ProfileStack', component: ProfileScreenStack},
+];
+
 const Tab = () => {
   return (
     <BottomTab.Navigator
       screenOptions={{
         headerShown: false,
       }}>
-      <BottomTab.Screen
+      {BottomTabData.map((item, index) => {
+        return (
+          <BottomTab.Screen
+            options={{
+              tabBarShowLabel: false,
+              tabBarButton: props => (
+                <TouchableOpacity
+                  {...props}
+                  style={{
+                    backgroundColor: 'red',
+                    width: '25%',
+                    justifyContent: 'center',
+                  }}>
+                  <Text style={{textAlign: 'center'}}>{item.label}</Text>
+                </TouchableOpacity>
+              ),
+            }}
+            name={item.name}
+            component={item.component}
+          />
+        );
+      })}
+      {/* <BottomTab.Screen
         options={{
           tabBarShowLabel: false,
           tabBarButton: props => (
-            <TouchableOpacity {...props} style={{backgroundColor: 'red'}}>
-              <Text>text</Text>
+            <TouchableOpacity
+              {...props}
+              style={{
+                backgroundColor: 'red',
+                width: '25%',
+                justifyContent: 'center',
+              }}>
+              <Text style={{textAlign: 'center'}}>text</Text>
             </TouchableOpacity>
           ),
         }}
@@ -98,7 +133,7 @@ const Tab = () => {
       />
       <BottomTab.Screen name="DeptStack" component={DeptScreenStack} />
       <BottomTab.Screen name="SearchStack" component={SearchScreenStack} />
-      <BottomTab.Screen name="ProfileStack" component={ProfileScreenStack} />
+      <BottomTab.Screen name="ProfileStack" component={ProfileScreenStack} /> */}
     </BottomTab.Navigator>
   );
 };
