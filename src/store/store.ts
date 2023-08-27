@@ -1,6 +1,6 @@
 import {configureStore, createSlice} from '@reduxjs/toolkit';
 import colorSlice from './slices/ColorSlice';
-import RootState from './store.types';
+// import RootState from './store.types';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import themeSlice from './slices/ThemeSlice';
 import usersApi from 'api/users';
@@ -23,5 +23,6 @@ const store = configureStore({
 
 export default store;
 export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
