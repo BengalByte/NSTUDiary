@@ -1,9 +1,9 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Provider} from 'react-redux';
-import store from 'store/store';
+import store, {useTypedSelector} from 'store/store';
 import 'react-native-gesture-handler';
-import {RootDrawer} from 'navigation/NewNavigator';
+import {AuthScreenStack, RootDrawer} from 'navigation/NewNavigator';
 import HomeScreen from 'screens/Test/HomeScreen';
 import {NavigationContainer} from '@react-navigation/native';
 // import AppNavigator from 'navigation/AppNavigator';
@@ -17,10 +17,12 @@ interface User {
 }
 
 function App(): JSX.Element {
+  const isAuthenticated = true;
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <RootDrawer />
+        {isAuthenticated ? <RootDrawer /> : <AuthScreenStack />}
+
         {/* <HomeScreen /> */}
       </NavigationContainer>
     </Provider>

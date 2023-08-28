@@ -1,4 +1,8 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {Text, TouchableOpacity, View} from 'react-native';
+import {
+  BottomTabBarProps,
+  createBottomTabNavigator,
+} from '@react-navigation/bottom-tabs';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from 'screens/Test/HomeScreen';
@@ -16,7 +20,14 @@ import SearchListScreen from 'screens/Test/SearchListScreen';
 import ProfileScreen from 'screens/Test/ProfileScreen';
 import ProfileSettingsScreen from 'screens/Test/ProfileSettingsScreen';
 import IndividualDetailsScreen from 'screens/Test/IndividualDetailsScreen';
-import {Text, TouchableOpacity, View} from 'react-native';
+import useResponsiveSize from 'hooks/useResponsiveSize';
+import CustomIcon from 'components/CustomIcon';
+import SignInScreen from 'screens/Test/SignInScreen';
+import SignUpScreen from 'screens/Test/SignUpScreen';
+import ForgotPasswordScreen from 'screens/Test/ForgotPasswordScreen';
+import {useTypedSelector} from 'store/store';
+import {theme} from 'utils/theme';
+import ClubListScreen from 'screens/Test/ClubListScreen';
 
 type AuthStackParamList = {
   SignIn: undefined;
@@ -24,18 +35,69 @@ type AuthStackParamList = {
   ForgotPassword: undefined;
 };
 
+type HomeStackParamList = {
+  Home: undefined;
+  EventList: undefined;
+  ClubList: undefined;
+};
+
+type DeptStackParamList = {
+  Department: undefined;
+  DepartmentList: undefined;
+  TeacherList: undefined;
+  StudentsList: undefined;
+  Resource: undefined;
+  OfficeList: undefined;
+  Notice: undefined;
+};
+
+type SearchStackParamList = {
+  Search: undefined;
+  SearchList: undefined;
+};
+
+type ProfileStackParamList = {
+  Profile: undefined;
+  ProfileSettings: undefined;
+};
+
+type BottomTabParamList = {
+  HomeStack: HomeStackParamList;
+  DeptStack: DeptStackParamList;
+  SearchStack: SearchStackParamList;
+  ProfileStack: ProfileStackParamList;
+};
+
+const AuthStack = createNativeStackNavigator<AuthStackParamList>();
 const Drawer = createDrawerNavigator();
-const BottomTab = createBottomTabNavigator();
-const HomeStack = createNativeStackNavigator();
-const DeptStack = createNativeStackNavigator();
-const SearchStack = createNativeStackNavigator();
-const ProfileStack = createNativeStackNavigator();
+const BottomTab = createBottomTabNavigator<BottomTabParamList>();
+const HomeStack = createNativeStackNavigator<HomeStackParamList>();
+const DeptStack = createNativeStackNavigator<DeptStackParamList>();
+const SearchStack = createNativeStackNavigator<SearchStackParamList>();
+const ProfileStack = createNativeStackNavigator<ProfileStackParamList>();
+
+export const AuthScreenStack = () => {
+  return (
+    <AuthStack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <AuthStack.Screen name="SignIn" component={SignInScreen} />
+      <AuthStack.Screen name="SignUp" component={SignUpScreen} />
+      <AuthStack.Screen
+        name="ForgotPassword"
+        component={ForgotPasswordScreen}
+      />
+    </AuthStack.Navigator>
+  );
+};
 
 const HomeScreenStack = () => {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen name="Home" component={HomeScreen} />
       <HomeStack.Screen name="EventList" component={EventListScreen} />
+      <HomeStack.Screen name="ClubList" component={ClubListScreen} />
     </HomeStack.Navigator>
   );
 };
@@ -51,7 +113,7 @@ const DeptScreenStack = () => {
       <DeptStack.Screen name="TeacherList" component={TeachersListScreen} />
       <DeptStack.Screen name="StudentsList" component={StudentsListScreen} />
       <DeptStack.Screen name="Resource" component={ResourceScreen} />
-      <DeptStack.Screen name="OfficeListScreen" component={OfficeListScreen} />
+      <DeptStack.Screen name="OfficeList" component={OfficeListScreen} />
       <DeptStack.Screen name="Notice" component={NoticeScreen} />
     </DeptStack.Navigator>
   );
@@ -78,34 +140,155 @@ const ProfileScreenStack = () => {
   );
 };
 
-const BottomTabData = [
-  {label: 'Home', name: 'HomeStack', component: HomeScreenStack},
-  {label: 'Dept', name: 'DeptStack', component: DeptScreenStack},
-  {label: 'Search', name: 'SearchStack', component: SearchScreenStack},
-  {label: 'Profile', name: 'ProfileStack', component: ProfileScreenStack},
+interface BottomTabInterface {
+  label: string;
+  name: keyof BottomTabParamList;
+  component: React.FC;
+  icon: string;
+}
+
+type BottomTabDataInterface = BottomTabInterface[];
+
+const BottomTabData: BottomTabDataInterface = [
+  {label: 'Home', name: 'HomeStack', component: HomeScreenStack, icon: 'day'},
+  {label: 'Dept', name: 'DeptStack', component: DeptScreenStack, icon: 'night'},
+  {
+    label: 'Search',
+    name: 'SearchStack',
+    component: SearchScreenStack,
+    icon: 'day',
+  },
+  {
+    label: 'Profile',
+    name: 'ProfileStack',
+    component: ProfileScreenStack,
+    icon: 'day',
+  },
 ];
+
+function MyTabBar({state, descriptors, navigation}: BottomTabBarProps) {
+  const {Rp} = useResponsiveSize();
+  const currentTheme = useTypedSelector(state => state.theme.currentTheme);
+  return (
+    <View
+      style={{
+        flexDirection: 'row',
+        height: Rp(130),
+        backgroundColor: 'white',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderTopLeftRadius: Rp(40),
+        borderTopRightRadius: Rp(40),
+        shadowColor: 'black',
+        shadowOpacity: 0.15,
+        shadowOffset: {width: 0.15, height: 0.15},
+        shadowRadius: 10,
+        elevation: 10,
+      }}>
+      {state.routes.map((route, index) => {
+        const {options} = descriptors[route.key];
+        const TabBarIcon = options.tabBarIcon;
+        const ButtonComp = options.tabBarButton;
+        console.log('Options is =>', options);
+        const label =
+          options.tabBarLabel !== undefined
+            ? options.tabBarLabel
+            : options.title !== undefined
+            ? options.title
+            : route.name;
+
+        const isFocused = state.index === index;
+
+        const onPress = () => {
+          const event = navigation.emit({
+            type: 'tabPress',
+            target: route.key,
+            canPreventDefault: true,
+          });
+
+          if (!isFocused && !event.defaultPrevented) {
+            // The `merge: true` option makes sure that the params inside the tab screen are preserved
+            navigation.navigate(route.name, {merge: true});
+          }
+        };
+
+        const onLongPress = () => {
+          navigation.emit({
+            type: 'tabLongPress',
+            target: route.key,
+          });
+        };
+
+        return (
+          <TouchableOpacity
+            accessibilityRole="button"
+            accessibilityState={isFocused ? {selected: true} : {}}
+            accessibilityLabel={options.tabBarAccessibilityLabel}
+            testID={options.tabBarTestID}
+            onPress={onPress}
+            onLongPress={onLongPress}
+            style={{
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            {TabBarIcon && (
+              <TabBarIcon
+                focused={isFocused}
+                color={
+                  isFocused
+                    ? theme[currentTheme].primaryColor
+                    : theme[currentTheme].neutral10
+                }
+                size={Rp(50)}
+              />
+            )}
+            <Text
+              style={{
+                color: isFocused
+                  ? theme[currentTheme].primaryColor
+                  : theme[currentTheme].neutral10,
+                fontWeight: '500',
+              }}>
+              {typeof label === 'function'
+                ? label({
+                    focused: isFocused,
+                    color: isFocused
+                      ? theme[currentTheme].primaryColor
+                      : theme[currentTheme].neutral10,
+                    position: 'below-icon',
+                    children: '',
+                  })
+                : label}
+            </Text>
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+  );
+}
 
 const Tab = () => {
   return (
     <BottomTab.Navigator
       screenOptions={{
         headerShown: false,
-      }}>
+        tabBarStyle: {},
+      }}
+      tabBar={props => <MyTabBar {...props} />}>
       {BottomTabData.map((item, index) => {
         return (
           <BottomTab.Screen
+            key={index}
             options={{
               tabBarShowLabel: false,
-              tabBarButton: props => (
-                <TouchableOpacity
-                  {...props}
-                  style={{
-                    backgroundColor: 'red',
-                    width: '25%',
-                    justifyContent: 'center',
-                  }}>
-                  <Text style={{textAlign: 'center'}}>{item.label}</Text>
-                </TouchableOpacity>
+              tabBarLabel: item.label,
+              tabBarIcon: props => (
+                <CustomIcon
+                  name={item.icon}
+                  color={props.color}
+                  size={props.size}
+                />
               ),
             }}
             name={item.name}
@@ -113,27 +296,6 @@ const Tab = () => {
           />
         );
       })}
-      {/* <BottomTab.Screen
-        options={{
-          tabBarShowLabel: false,
-          tabBarButton: props => (
-            <TouchableOpacity
-              {...props}
-              style={{
-                backgroundColor: 'red',
-                width: '25%',
-                justifyContent: 'center',
-              }}>
-              <Text style={{textAlign: 'center'}}>text</Text>
-            </TouchableOpacity>
-          ),
-        }}
-        name="HomeStack"
-        component={HomeScreenStack}
-      />
-      <BottomTab.Screen name="DeptStack" component={DeptScreenStack} />
-      <BottomTab.Screen name="SearchStack" component={SearchScreenStack} />
-      <BottomTab.Screen name="ProfileStack" component={ProfileScreenStack} /> */}
     </BottomTab.Navigator>
   );
 };
@@ -143,6 +305,7 @@ export const RootDrawer = () => {
     <Drawer.Navigator
       screenOptions={{
         headerShown: false,
+        drawerContentContainerStyle: {backgroundColor: 'tomato', flex: 1},
       }}>
       <Drawer.Screen name="Main" component={Tab} />
       <Drawer.Screen name="Notification" component={NotificationScreen} />
