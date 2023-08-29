@@ -3,7 +3,10 @@ import {
   BottomTabBarProps,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import {
+  DrawerContentComponentProps,
+  createDrawerNavigator,
+} from '@react-navigation/drawer';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from 'screens/Test/HomeScreen';
 import EventListScreen from 'screens/Test/EventListScreen';
@@ -28,48 +31,18 @@ import ForgotPasswordScreen from 'screens/Test/ForgotPasswordScreen';
 import {useTypedSelector} from 'store/store';
 import {theme} from 'utils/theme';
 import ClubListScreen from 'screens/Test/ClubListScreen';
-
-type AuthStackParamList = {
-  SignIn: undefined;
-  SignUp: undefined;
-  ForgotPassword: undefined;
-};
-
-type HomeStackParamList = {
-  Home: undefined;
-  EventList: undefined;
-  ClubList: undefined;
-};
-
-type DeptStackParamList = {
-  Department: undefined;
-  DepartmentList: undefined;
-  TeacherList: undefined;
-  StudentsList: undefined;
-  Resource: undefined;
-  OfficeList: undefined;
-  Notice: undefined;
-};
-
-type SearchStackParamList = {
-  Search: undefined;
-  SearchList: undefined;
-};
-
-type ProfileStackParamList = {
-  Profile: undefined;
-  ProfileSettings: undefined;
-};
-
-type BottomTabParamList = {
-  HomeStack: HomeStackParamList;
-  DeptStack: DeptStackParamList;
-  SearchStack: SearchStackParamList;
-  ProfileStack: ProfileStackParamList;
-};
+import {
+  AuthStackParamList,
+  BottomTabParamList,
+  DeptStackParamList,
+  DrawerParamList,
+  HomeStackParamList,
+  ProfileStackParamList,
+  SearchStackParamList,
+} from './types';
 
 const AuthStack = createNativeStackNavigator<AuthStackParamList>();
-const Drawer = createDrawerNavigator();
+const Drawer = createDrawerNavigator<DrawerParamList>();
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 const HomeStack = createNativeStackNavigator<HomeStackParamList>();
 const DeptStack = createNativeStackNavigator<DeptStackParamList>();
@@ -221,6 +194,7 @@ function MyTabBar({state, descriptors, navigation}: BottomTabBarProps) {
 
         return (
           <TouchableOpacity
+            key={index}
             accessibilityRole="button"
             accessibilityState={isFocused ? {selected: true} : {}}
             accessibilityLabel={options.tabBarAccessibilityLabel}
@@ -300,13 +274,48 @@ const Tab = () => {
   );
 };
 
+const DrawerData = [
+  {
+    label: 'Home',
+    icon: 'night',
+    route: 'Main',
+  },
+  {
+    label: 'Notification',
+    icon: 'day',
+    route: 'Notification',
+  },
+];
+
+const MyDrawer = ({
+  state,
+  navigation,
+  descriptors,
+}: DrawerContentComponentProps) => {
+  return (
+    <View style={{backgroundColor: '', flex: 1}}>
+      {DrawerData.map((item, index) => {
+        return (
+          <TouchableOpacity
+            key={index}
+            activeOpacity={0.5}
+            style={{marginVertical: 10}}
+            onPress={() => navigation.navigate(item.route)}>
+            <Text style={{fontSize: 19}}>{item.label}</Text>
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+  );
+};
+
 export const RootDrawer = () => {
   return (
     <Drawer.Navigator
       screenOptions={{
         headerShown: false,
-        drawerContentContainerStyle: {backgroundColor: 'tomato', flex: 1},
-      }}>
+      }}
+      drawerContent={props => <MyDrawer {...props} />}>
       <Drawer.Screen name="Main" component={Tab} />
       <Drawer.Screen name="Notification" component={NotificationScreen} />
       <Drawer.Screen
