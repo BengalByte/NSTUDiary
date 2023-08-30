@@ -1,4 +1,6 @@
 import {SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
+import {useTypedSelector} from 'store/store';
+import {theme} from 'utils/theme';
 import {
   BottomTabBarProps,
   createBottomTabNavigator,
@@ -8,29 +10,38 @@ import {
   createDrawerNavigator,
 } from '@react-navigation/drawer';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import HomeScreen from 'screens/Test/HomeScreen';
-import EventListScreen from 'screens/Test/EventListScreen';
+import {
+  ClubListScreen,
+  HomeScreen,
+  EventListScreen,
+} from 'screens/HomeStackScreens';
 import NotificationScreen from 'screens/Test/NotificationScreen';
-import DeptScreen from 'screens/Test/DeptScreen';
-import DepartmentListScreen from 'screens/Test/DepartmentListScreen';
-import TeachersListScreen from 'screens/Test/TeachersListScreen';
-import StudentsListScreen from 'screens/Test/StudentsListScreen';
-import ResourceScreen from 'screens/Test/ResourceScreen';
-import OfficeListScreen from 'screens/Test/OfficeListScreen';
-import NoticeScreen from 'screens/Test/NoticeScreen';
-import SearchScreen from 'screens/Test/SearchScreen';
-import SearchListScreen from 'screens/Test/SearchListScreen';
-import ProfileScreen from 'screens/Test/ProfileScreen';
-import ProfileSettingsScreen from 'screens/Test/ProfileSettingsScreen';
+import {
+  TeachersListScreen,
+  NoticeScreen,
+  OfficeListScreen,
+  ResourceScreen,
+  DeptScreen,
+  DepartmentListScreen,
+  StudentsListScreen,
+} from 'screens/DeptStackScreens';
+
+import {SearchListScreen, SearchScreen} from 'screens/SearchStackScreens';
+
+import {
+  ProfileSettingsScreen,
+  ProfileScreen,
+} from 'screens/ProfileStackScreens';
 import IndividualDetailsScreen from 'screens/Test/IndividualDetailsScreen';
 import useResponsiveSize from 'hooks/useResponsiveSize';
 import CustomIcon from 'components/CustomIcon';
-import SignInScreen from 'screens/Test/SignInScreen';
-import SignUpScreen from 'screens/Test/SignUpScreen';
-import ForgotPasswordScreen from 'screens/Test/ForgotPasswordScreen';
-import {useTypedSelector} from 'store/store';
-import {theme} from 'utils/theme';
-import ClubListScreen from 'screens/Test/ClubListScreen';
+
+import {
+  ForgotPasswordScreen,
+  SignUpScreen,
+  SignInScreen,
+} from 'screens/AuthStackScreens';
+
 import {
   AuthStackParamList,
   BottomTabParamList,

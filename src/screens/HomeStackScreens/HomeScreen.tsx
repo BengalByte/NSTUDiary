@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {HomeScreenProps} from 'navigation/types';
 
-const HomeScreen = ({route, navigation}: HomeScreenProps) => {
+export const HomeScreen = ({route, navigation}: HomeScreenProps) => {
   return (
     <View>
       <Text>HomeScreen</Text>
@@ -13,5 +13,3 @@ const HomeScreen = ({route, navigation}: HomeScreenProps) => {
     </View>
   );
 };
-
-export default HomeScreen;

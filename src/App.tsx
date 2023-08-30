@@ -22,8 +22,6 @@ function App(): JSX.Element {
     <Provider store={store}>
       <NavigationContainer>
         {isAuthenticated ? <RootDrawer /> : <AuthScreenStack />}
-
-        {/* <HomeScreen /> */}
       </NavigationContainer>
     </Provider>
   );

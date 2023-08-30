@@ -1,12 +1,10 @@
 import {View, Text} from 'react-native';
 import React from 'react';
 
-const SignInScreen = () => {
+export const ProfileSettingsScreen = () => {
   return (
     <View>
-      <Text>SignInScreen</Text>
+      <Text>ProfileSettingsScreen</Text>
     </View>
   );
 };
-
-export default SignInScreen;

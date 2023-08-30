@@ -1,12 +1,10 @@
 import {View, Text} from 'react-native';
 import React from 'react';
 
-const ResourceScreen = () => {
+export const NoticeScreen = () => {
   return (
     <View>
-      <Text>ResourceScreen</Text>
+      <Text>NoticeScreen</Text>
     </View>
   );
 };
-
-export default ResourceScreen;

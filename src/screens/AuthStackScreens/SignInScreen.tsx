@@ -1,12 +1,10 @@
 import {View, Text} from 'react-native';
 import React from 'react';
 
-const OfficeListScreen = () => {
+export const SignInScreen = () => {
   return (
     <View>
-      <Text>OfficeListScreen</Text>
+      <Text>SignInScreen</Text>
     </View>
   );
 };
-
-export default OfficeListScreen;

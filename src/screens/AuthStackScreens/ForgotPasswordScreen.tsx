@@ -1,12 +1,10 @@
 import {View, Text} from 'react-native';
 import React from 'react';
 
-const SignUpScreen = () => {
+export const ForgotPasswordScreen = () => {
   return (
     <View>
-      <Text>SignUpScreen</Text>
+      <Text>ForgotPasswordScreen</Text>
     </View>
   );
 };
-
-export default SignUpScreen;
