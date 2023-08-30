@@ -1,4 +1,4 @@
-import {Text, TouchableOpacity, View} from 'react-native';
+import {SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
 import {
   BottomTabBarProps,
   createBottomTabNavigator,
@@ -293,7 +293,7 @@ const MyDrawer = ({
   descriptors,
 }: DrawerContentComponentProps) => {
   return (
-    <View style={{backgroundColor: '', flex: 1}}>
+    <SafeAreaView style={{backgroundColor: '', flex: 1}}>
       {DrawerData.map((item, index) => {
         return (
           <TouchableOpacity
@@ -305,7 +305,7 @@ const MyDrawer = ({
           </TouchableOpacity>
         );
       })}
-    </View>
+    </SafeAreaView>
   );
 };
 
