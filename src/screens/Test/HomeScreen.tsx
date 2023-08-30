@@ -7,7 +7,7 @@ const HomeScreen = ({route, navigation}: HomeScreenProps) => {
     <View>
       <Text>HomeScreen</Text>
       <TouchableOpacity
-        onPress={() => navigation.navigate('IndividualDetails')}
+        onPress={() => navigation.navigate('DeptStack', {screen: 'Department'})}
         style={{width: 100, height: 100, backgroundColor: 'red'}}
       />
     </View>

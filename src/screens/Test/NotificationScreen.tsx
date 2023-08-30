@@ -1,8 +1,9 @@
-import {View, Text} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import TestingText from 'ui/Test/TestingText';
+import {NotificationScreenProps} from 'navigation/types';
 
-const NotificationScreen = () => {
+const NotificationScreen = ({route, navigation}: NotificationScreenProps) => {
   return (
     <View>
       <TestingText
@@ -11,6 +12,15 @@ const NotificationScreen = () => {
         numberOfLines={1}>
         Noification
       </TestingText>
+      <TouchableOpacity
+        style={{width: 100, height: 100, backgroundColor: 'red'}}
+        onPress={() =>
+          navigation.navigate('Main', {
+            screen: 'DeptStack',
+            params: {screen: 'DepartmentList'},
+          })
+        }
+      />
     </View>
   );
 };

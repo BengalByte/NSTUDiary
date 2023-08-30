@@ -1,5 +1,8 @@
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
-import type {CompositeScreenProps} from '@react-navigation/native';
+import type {
+  CompositeScreenProps,
+  NavigatorScreenParams,
+} from '@react-navigation/native';
 import type {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import {DrawerScreenProps} from '@react-navigation/drawer';
 
@@ -36,14 +39,14 @@ export type ProfileStackParamList = {
 };
 
 export type BottomTabParamList = {
-  HomeStack: HomeStackParamList;
-  DeptStack: DeptStackParamList;
-  SearchStack: SearchStackParamList;
-  ProfileStack: ProfileStackParamList;
+  HomeStack: NavigatorScreenParams<HomeStackParamList>;
+  DeptStack: NavigatorScreenParams<DeptStackParamList>;
+  SearchStack: NavigatorScreenParams<SearchStackParamList>;
+  ProfileStack: NavigatorScreenParams<ProfileStackParamList>;
 };
 
 export type DrawerParamList = {
-  Main: BottomTabParamList;
+  Main: NavigatorScreenParams<BottomTabParamList>;
   Notification: undefined;
   IndividualDetails: undefined;
 };
@@ -52,17 +55,8 @@ type HomeStackScreenProps<RouteName extends keyof HomeStackParamList> =
   CompositeScreenProps<
     NativeStackScreenProps<HomeStackParamList, RouteName>,
     CompositeScreenProps<
-      NativeStackScreenProps<DeptStackParamList>,
-      CompositeScreenProps<
-        NativeStackScreenProps<SearchStackParamList>,
-        CompositeScreenProps<
-          NativeStackScreenProps<ProfileStackParamList>,
-          CompositeScreenProps<
-            DrawerScreenProps<DrawerParamList>,
-            BottomTabScreenProps<BottomTabParamList>
-          >
-        >
-      >
+      DrawerScreenProps<DrawerParamList>,
+      BottomTabScreenProps<BottomTabParamList>
     >
   >;
 
@@ -70,17 +64,8 @@ type DeptStackScreenProps<RouteName extends keyof DeptStackParamList> =
   CompositeScreenProps<
     NativeStackScreenProps<DeptStackParamList, RouteName>,
     CompositeScreenProps<
-      NativeStackScreenProps<HomeStackParamList>,
-      CompositeScreenProps<
-        NativeStackScreenProps<SearchStackParamList>,
-        CompositeScreenProps<
-          NativeStackScreenProps<ProfileStackParamList>,
-          CompositeScreenProps<
-            DrawerScreenProps<DrawerParamList>,
-            BottomTabScreenProps<BottomTabParamList>
-          >
-        >
-      >
+      DrawerScreenProps<DrawerParamList>,
+      BottomTabScreenProps<BottomTabParamList>
     >
   >;
 
@@ -88,17 +73,8 @@ type SearchStackScreenProps<RouteName extends keyof SearchStackParamList> =
   CompositeScreenProps<
     NativeStackScreenProps<SearchStackParamList, RouteName>,
     CompositeScreenProps<
-      NativeStackScreenProps<HomeStackParamList>,
-      CompositeScreenProps<
-        NativeStackScreenProps<DeptStackParamList>,
-        CompositeScreenProps<
-          NativeStackScreenProps<ProfileStackParamList>,
-          CompositeScreenProps<
-            DrawerScreenProps<DrawerParamList>,
-            BottomTabScreenProps<BottomTabParamList>
-          >
-        >
-      >
+      DrawerScreenProps<DrawerParamList>,
+      BottomTabScreenProps<BottomTabParamList>
     >
   >;
 
@@ -106,17 +82,8 @@ type ProfileStackScreenProps<RouteName extends keyof ProfileStackParamList> =
   CompositeScreenProps<
     NativeStackScreenProps<ProfileStackParamList, RouteName>,
     CompositeScreenProps<
-      NativeStackScreenProps<HomeStackParamList>,
-      CompositeScreenProps<
-        NativeStackScreenProps<DeptStackParamList>,
-        CompositeScreenProps<
-          NativeStackScreenProps<SearchStackParamList>,
-          CompositeScreenProps<
-            DrawerScreenProps<DrawerParamList>,
-            BottomTabScreenProps<BottomTabParamList>
-          >
-        >
-      >
+      DrawerScreenProps<DrawerParamList>,
+      BottomTabScreenProps<BottomTabParamList>
     >
   >;
 
@@ -138,3 +105,13 @@ export type SearchListScreenProps = SearchStackScreenProps<'SearchList'>;
 export type ProfileScreenProps = ProfileStackScreenProps<'Profile'>;
 export type ProfileSettingsScreenProps =
   ProfileStackScreenProps<'ProfileSettings'>;
+
+export type NotificationScreenProps = DrawerScreenProps<
+  DrawerParamList,
+  'Notification'
+>;
+
+export type IndividualDetailsScreenProps = DrawerScreenProps<
+  DrawerParamList,
+  'IndividualDetails'
+>;
