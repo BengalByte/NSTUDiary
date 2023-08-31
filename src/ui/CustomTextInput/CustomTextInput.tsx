@@ -30,7 +30,7 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
     text: {
       fontSize: Rp(35),
       fontWeight: 'bold',
-      color: theme[themeColor].textColor,
+      color: theme[themeColor].base.primary.dark,
       marginVertical: Rp(15),
     },
   });

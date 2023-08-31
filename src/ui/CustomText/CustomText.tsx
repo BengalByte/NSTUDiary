@@ -1,22 +1,24 @@
-import {StyleSheet, Text, TextStyle, View} from 'react-native';
+import {Text, TextStyle} from 'react-native';
 import React from 'react';
 import {TextProps} from 'react-native';
 import {getTextStyles} from './textStyles';
 import {useTypedSelector} from 'store/store';
+import useResponsiveSize from 'hooks/useResponsiveSize';
 
-interface TestingTextProps extends TextProps {
+interface CustomTextProps extends TextProps {
   variant: keyof ReturnType<typeof getTextStyles>;
   children: React.ReactNode;
 }
 
-const TestingText: React.FC<TestingTextProps> = ({
+export const CustomText: React.FC<CustomTextProps> = ({
   variant,
   children,
   style,
   ...rest
 }) => {
-  const currentTheme = useTypedSelector(state => state.theme.currentTheme);
-  const textStyles = getTextStyles(currentTheme);
+  const mode = useTypedSelector(state => state.theme.currentTheme);
+  const {Rp, Rh} = useResponsiveSize();
+  const textStyles = getTextStyles({mode, Rp, Rh});
   const textStyle: TextStyle = textStyles[variant];
   return (
     <Text style={[textStyle, style]} {...rest}>
@@ -24,5 +26,3 @@ const TestingText: React.FC<TestingTextProps> = ({
     </Text>
   );
 };
-
-export default TestingText;
