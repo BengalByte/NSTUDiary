@@ -31,11 +31,22 @@ const NotificationScreen = ({route, navigation}: NotificationScreenProps) => {
         textVariant="regularText" // Choose the appropriate variant from your textStyles
         label="Username"
         placeholder="Enter your username"
+        icon={true}
         // value={'abc'}
+        // onChangeText={() => {}}
+        containerStyle={{marginBottom: 20, padding: 20}}
+      />
+      <MyCustomTextInput
+        variant="primary"
+        textVariant="regularText" // Choose the appropriate variant from your textStyles
+        label="Username"
+        placeholder="Enter your username"
+        iconPosition="right"
+        // value={'abc'}
+        icon={true}
         onChangeText={() => {}}
         containerStyle={{marginBottom: 20, padding: 20}}
       />
-
       {/* <TouchableOpacity
         style={{width: 100, height: 100, backgroundColor: 'red'}}
         onPress={() =>
