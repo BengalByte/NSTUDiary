@@ -8,7 +8,8 @@ export const getButtonVariants = ({mode, Rp, Rh}: GetStyleSheetType) => {
       height: Rp(120),
       borderRadius: Rp(30),
       display: 'flex',
-      justifyContent: 'center',
+      flexDirection: 'row',
+      justifyContent: 'space-around',
       alignItems: 'center',
     },
     secondary: {
@@ -16,7 +17,8 @@ export const getButtonVariants = ({mode, Rp, Rh}: GetStyleSheetType) => {
       height: Rp(120),
       borderRadius: Rp(30),
       display: 'flex',
-      justifyContent: 'center',
+      flexDirection: 'row',
+      justifyContent: 'space-around',
       alignItems: 'center',
     },
   });

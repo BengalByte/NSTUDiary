@@ -25,8 +25,8 @@ export const MyCustomButton = ({
   const buttonVariantStyles = getButtonVariants({mode, Rp, Rh});
   const buttonVariantStyle = buttonVariantStyles[variant];
   return (
-    <TouchableOpacity style={[buttonVariantStyle]}>
-      <CustomText variant={textVariant}>MyCustomButton</CustomText>
+    <TouchableOpacity style={[buttonVariantStyle]} {...rest}>
+      {/* <CustomText variant={textVariant}>MyCustomButton</CustomText> */}
     </TouchableOpacity>
   );
 };

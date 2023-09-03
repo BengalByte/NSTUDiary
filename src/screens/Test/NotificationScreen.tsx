@@ -6,6 +6,7 @@ import CustomTextInput from 'ui/CustomTextInput';
 import {MyCustomTextInput} from 'ui/MyCustomTextInput';
 import CustomButton from 'ui/CustomButton';
 import {MyCustomButton} from 'ui/MyCustomButton';
+import CustomIcon from 'components/CustomIcon';
 
 const NotificationScreen = ({route, navigation}: NotificationScreenProps) => {
   return (
@@ -42,8 +43,13 @@ const NotificationScreen = ({route, navigation}: NotificationScreenProps) => {
         onPress={() => {}}
         title="Secondary Button"
       />
-      <MyCustomButton variant="primary">This Is Custom</MyCustomButton>
-      <MyCustomButton variant="secondary" />
+      <MyCustomButton variant="primary">
+        <CustomText variant={'regularText'}>MyCustomButton</CustomText>
+        <CustomIcon name="day" size={20} />
+      </MyCustomButton>
+      <MyCustomButton variant="secondary">
+        <CustomText variant={'regularText'}>MyCustomButton</CustomText>
+      </MyCustomButton>
     </View>
   );
 };
