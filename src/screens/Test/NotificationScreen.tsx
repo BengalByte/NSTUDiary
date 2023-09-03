@@ -4,6 +4,8 @@ import {NotificationScreenProps} from 'navigation/types';
 import {CustomText} from 'ui/CustomText';
 import CustomTextInput from 'ui/CustomTextInput';
 import {MyCustomTextInput} from 'ui/MyCustomTextInput';
+import CustomButton from 'ui/CustomButton';
+import {MyCustomButton} from 'ui/MyCustomButton';
 
 const NotificationScreen = ({route, navigation}: NotificationScreenProps) => {
   return (
@@ -12,50 +14,36 @@ const NotificationScreen = ({route, navigation}: NotificationScreenProps) => {
       <CustomText variant="headline">This is Custom Text</CustomText>
       <CustomText variant="regularText">This is Custom Text</CustomText>
       <CustomText variant="smallText">This is Custom Text</CustomText>
-      {/* <CustomTextInput
-        inputType="text"
-        label="Label"
-        variant="primary"
-        onChangeText={() => {}}
-        placeholder="This is placeholder"
-      />
-      <CustomTextInput
-        inputType="text"
-        label="Label"
-        variant="primary"
-        onChangeText={() => {}}
-        placeholder="This is placeholder"
-      /> */}
       <MyCustomTextInput
         variant="secondary"
-        textVariant="regularText" // Choose the appropriate variant from your textStyles
+        textVariant="regularText"
         label="Username"
         placeholder="Enter your username"
         icon={true}
-        // value={'abc'}
-        // onChangeText={() => {}}
         containerStyle={{marginBottom: 20, padding: 20}}
       />
       <MyCustomTextInput
         variant="primary"
-        textVariant="regularText" // Choose the appropriate variant from your textStyles
+        textVariant="regularText"
         label="Username"
         placeholder="Enter your username"
         iconPosition="right"
-        // value={'abc'}
         icon={true}
         onChangeText={() => {}}
         containerStyle={{marginBottom: 20, padding: 20}}
       />
-      {/* <TouchableOpacity
-        style={{width: 100, height: 100, backgroundColor: 'red'}}
-        onPress={() =>
-          navigation.navigate('Main', {
-            screen: 'DeptStack',
-            params: {screen: 'DepartmentList'},
-          })
-        }
-      /> */}
+      <CustomButton
+        variant="primary"
+        onPress={() => {}}
+        title="Primary Button"
+      />
+      <CustomButton
+        variant="secondary"
+        onPress={() => {}}
+        title="Secondary Button"
+      />
+      <MyCustomButton variant="primary">This Is Custom</MyCustomButton>
+      <MyCustomButton variant="secondary" />
     </View>
   );
 };

@@ -18,8 +18,6 @@ const VARIANT_COMPONENT_MAP: Record<
 > = {
   primary: PrimaryButton,
   secondary: SecondaryButton,
-  // tertiary: CustomTertiaryButton,
-  // quaternary: CustomQuaternaryButton,
 };
 
 const CustomButton: React.FC<CustomButtonProps> = ({

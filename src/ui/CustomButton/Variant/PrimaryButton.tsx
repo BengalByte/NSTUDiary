@@ -1,7 +1,6 @@
 import React from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 import {CustomButtonVariantProps} from '../CustomButton.types';
-// import styles from './CustomButton.styles';
 import {useTypedSelector} from 'store/store';
 import {theme} from 'utils/theme';
 import styles from './CustomButton.styles';
@@ -17,8 +16,8 @@ const PrimaryButton: React.FC<CustomButtonVariantProps> = ({
   const currentTheme = useTypedSelector(state => state.theme.currentTheme);
   const variantStyles = StyleSheet.create({
     themePrimaryStyle: {
-      backgroundColor: theme[currentTheme].primaryColor,
-      color: theme[currentTheme].primaryColor,
+      backgroundColor: theme[currentTheme].brand.primary.normal,
+      color: theme[currentTheme].brand.primary.dark,
     },
     sizePrimaryStyle: {
       width: Rp(500),
@@ -27,7 +26,7 @@ const PrimaryButton: React.FC<CustomButtonVariantProps> = ({
     textPrimaryStyle: {
       textAlign: 'center',
       fontSize: Rp(40),
-      color: theme[currentTheme].white,
+      color: theme[currentTheme].base.primary.dark,
     },
   });
 
