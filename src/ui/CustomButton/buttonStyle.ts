@@ -5,21 +5,33 @@ export const getButtonVariants = ({mode, Rp, Rh}: GetStyleSheetType) => {
   return StyleSheet.create({
     primary: {
       backgroundColor: theme[mode].brand.primary.normal,
-      height: Rp(120),
       borderRadius: Rp(30),
       display: 'flex',
       flexDirection: 'row',
-      justifyContent: 'space-around',
       alignItems: 'center',
+      alignSelf: 'flex-start',
+      paddingHorizontal: Rp(40),
+      paddingVertical: Rp(30),
     },
     secondary: {
       backgroundColor: theme[mode].brand.secondary.normal,
-      height: Rp(120),
       borderRadius: Rp(30),
       display: 'flex',
       flexDirection: 'row',
-      justifyContent: 'space-around',
       alignItems: 'center',
+      alignSelf: 'flex-start',
+      paddingHorizontal: Rp(40),
+      paddingVertical: Rp(30),
+    },
+    tertiary: {
+      backgroundColor: theme[mode].brand.tertiary.normal,
+      borderRadius: Rp(30),
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      alignSelf: 'flex-start',
+      paddingHorizontal: Rp(40),
+      paddingVertical: Rp(20),
     },
   });
 };

@@ -2,11 +2,9 @@ import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {NotificationScreenProps} from 'navigation/types';
 import {CustomText} from 'ui/CustomText';
-import CustomTextInput from 'ui/CustomTextInput';
-import {MyCustomTextInput} from 'ui/MyCustomTextInput';
-import CustomButton from 'ui/CustomButton';
-import {MyCustomButton} from 'ui/MyCustomButton';
 import CustomIcon from 'components/CustomIcon';
+import {CustomTextInput} from 'ui/CustomTextInput';
+import {CustomButton} from 'ui/CustomButton';
 
 const NotificationScreen = ({route, navigation}: NotificationScreenProps) => {
   return (
@@ -15,7 +13,7 @@ const NotificationScreen = ({route, navigation}: NotificationScreenProps) => {
       <CustomText variant="headline">This is Custom Text</CustomText>
       <CustomText variant="regularText">This is Custom Text</CustomText>
       <CustomText variant="smallText">This is Custom Text</CustomText>
-      <MyCustomTextInput
+      <CustomTextInput
         variant="secondary"
         textVariant="regularText"
         label="Username"
@@ -23,7 +21,7 @@ const NotificationScreen = ({route, navigation}: NotificationScreenProps) => {
         icon={true}
         containerStyle={{marginBottom: 20, padding: 20}}
       />
-      <MyCustomTextInput
+      <CustomTextInput
         variant="primary"
         textVariant="regularText"
         label="Username"
@@ -33,23 +31,22 @@ const NotificationScreen = ({route, navigation}: NotificationScreenProps) => {
         onChangeText={() => {}}
         containerStyle={{marginBottom: 20, padding: 20}}
       />
-      <CustomButton
-        variant="primary"
-        onPress={() => {}}
-        title="Primary Button"
-      />
-      <CustomButton
-        variant="secondary"
-        onPress={() => {}}
-        title="Secondary Button"
-      />
-      <MyCustomButton variant="primary">
+
+      <CustomButton variant="primary">
         <CustomText variant={'regularText'}>MyCustomButton</CustomText>
         <CustomIcon name="day" size={20} />
-      </MyCustomButton>
-      <MyCustomButton variant="secondary">
+      </CustomButton>
+      <CustomButton variant="secondary">
         <CustomText variant={'regularText'}>MyCustomButton</CustomText>
-      </MyCustomButton>
+      </CustomButton>
+      <View
+        style={{
+          backgroundColor: 'tomato',
+          padding: 10,
+          alignSelf: 'flex-start',
+        }}>
+        <Text>This is Text</Text>
+      </View>
     </View>
   );
 };

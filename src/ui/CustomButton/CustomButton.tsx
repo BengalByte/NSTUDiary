@@ -1,42 +1,30 @@
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TouchableOpacityProps,
+} from 'react-native';
 import React from 'react';
-import {ViewStyle, TextStyle} from 'react-native';
-import SecondaryButton from './Variant/SecondaryButton';
-import PrimaryButton from './Variant/PrimaryButton';
-import {CustomButtonVariantProps} from './CustomButton.types';
+import {getButtonVariants} from './buttonStyle';
+import {useTypedSelector} from 'store/store';
+import useResponsiveSize from 'hooks/useResponsiveSize';
+import {getTextStyles} from 'ui/CustomText';
 
-interface CustomButtonProps {
-  onPress: () => void;
-  title: string;
-  variant: 'primary' | 'secondary';
-  style?: ViewStyle;
-  textStyle?: TextStyle;
+interface CustomButtonInterface extends TouchableOpacityProps {
+  variant: keyof ReturnType<typeof getButtonVariants>;
+  textVariant?: keyof ReturnType<typeof getTextStyles>;
 }
 
-const VARIANT_COMPONENT_MAP: Record<
-  string,
-  React.ComponentType<CustomButtonVariantProps>
-> = {
-  primary: PrimaryButton,
-  secondary: SecondaryButton,
-};
-
-const CustomButton: React.FC<CustomButtonProps> = ({
-  onPress,
-  title,
-  style,
-  textStyle,
+export const CustomButton = ({
   variant,
-}) => {
-  const ButtonComponent = VARIANT_COMPONENT_MAP[variant] || PrimaryButton;
-
+  textVariant = 'regularText',
+  ...rest
+}: CustomButtonInterface) => {
+  const mode = useTypedSelector(state => state.theme.currentTheme);
+  const {Rp, Rh} = useResponsiveSize();
+  const buttonVariantStyles = getButtonVariants({mode, Rp, Rh});
+  const buttonVariantStyle = buttonVariantStyles[variant];
   return (
-    <ButtonComponent
-      onPress={onPress}
-      title={title}
-      style={{...style, marginTop: 30}}
-      textStyle={textStyle}
-    />
+    <TouchableOpacity style={[buttonVariantStyle]} {...rest}></TouchableOpacity>
   );
 };
-
-export default CustomButton;

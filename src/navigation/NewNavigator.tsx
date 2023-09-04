@@ -15,7 +15,7 @@ import {
   HomeScreen,
   EventListScreen,
 } from 'screens/HomeStackScreens';
-import NotificationScreen from 'screens/Test/NotificationScreen';
+import NotificationScreen from 'screens/DrawerNavigatorScreens/NotificationScreen';
 import {
   TeachersListScreen,
   NoticeScreen,
@@ -32,7 +32,7 @@ import {
   ProfileSettingsScreen,
   ProfileScreen,
 } from 'screens/ProfileStackScreens';
-import IndividualDetailsScreen from 'screens/Test/IndividualDetailsScreen';
+import IndividualDetailsScreen from 'screens/DrawerNavigatorScreens/IndividualDetailsScreen';
 import useResponsiveSize from 'hooks/useResponsiveSize';
 import CustomIcon from 'components/CustomIcon';
 
@@ -51,6 +51,8 @@ import {
   ProfileStackParamList,
   SearchStackParamList,
 } from './types';
+import {CustomButton} from 'ui/CustomButton';
+import {CustomText} from 'ui/CustomText';
 
 const AuthStack = createNativeStackNavigator<AuthStackParamList>();
 const Drawer = createDrawerNavigator<DrawerParamList>();
@@ -222,8 +224,8 @@ function MyTabBar({state, descriptors, navigation}: BottomTabBarProps) {
                 focused={isFocused}
                 color={
                   isFocused
-                    ? theme[currentTheme].primaryColor
-                    : theme[currentTheme].neutral10
+                    ? theme[currentTheme].brand.primary.normal
+                    : theme[currentTheme].brand.secondary.normal
                 }
                 size={Rp(50)}
               />
@@ -231,16 +233,18 @@ function MyTabBar({state, descriptors, navigation}: BottomTabBarProps) {
             <Text
               style={{
                 color: isFocused
-                  ? theme[currentTheme].primaryColor
-                  : theme[currentTheme].neutral10,
+                  ? theme[currentTheme].brand.primary.normal
+                  : theme[currentTheme].brand.secondary.normal,
+
                 fontWeight: '500',
               }}>
               {typeof label === 'function'
                 ? label({
                     focused: isFocused,
                     color: isFocused
-                      ? theme[currentTheme].primaryColor
-                      : theme[currentTheme].neutral10,
+                      ? theme[currentTheme].brand.primary.normal
+                      : theme[currentTheme].brand.secondary.normal,
+
                     position: 'below-icon',
                     children: '',
                   })
@@ -307,13 +311,20 @@ const MyDrawer = ({
     <SafeAreaView style={{backgroundColor: '', flex: 1}}>
       {DrawerData.map((item, index) => {
         return (
-          <TouchableOpacity
+          // <TouchableOpacity
+          //   key={index}
+          //   activeOpacity={0.5}
+          //   style={{marginVertical: 10}}
+          //   onPress={() => navigation.navigate(item.route)}>
+          //   <Text style={{fontSize: 19}}>{item.label}</Text>
+          // </TouchableOpacity>
+          <CustomButton
+            variant="tertiary"
             key={index}
-            activeOpacity={0.5}
-            style={{marginVertical: 10}}
-            onPress={() => navigation.navigate(item.route)}>
-            <Text style={{fontSize: 19}}>{item.label}</Text>
-          </TouchableOpacity>
+            onPress={() => navigation.navigate(item.route)}
+            activeOpacity={0.9}>
+            <CustomText variant="smallText">{item.label}</CustomText>
+          </CustomButton>
         );
       })}
     </SafeAreaView>
