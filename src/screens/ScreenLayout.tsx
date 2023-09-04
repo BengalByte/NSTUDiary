@@ -16,7 +16,7 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({children}) => {
       paddingLeft: Rp(20),
       paddingRight: Rp(20),
       paddingTop: Rp(20),
-      backgroundColor: theme[currentTheme].base,
+      backgroundColor: theme[currentTheme].base.tertiary.normal,
       flex: 1,
     },
   });
