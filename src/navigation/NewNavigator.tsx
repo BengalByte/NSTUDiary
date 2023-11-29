@@ -1,47 +1,32 @@
-import {SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
-import {useTypedSelector} from 'store/store';
-import {theme} from 'utils/theme';
+import { BottomTabBarProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { DrawerContentComponentProps, createDrawerNavigator } from '@react-navigation/drawer';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import {
-  BottomTabBarProps,
-  createBottomTabNavigator,
-} from '@react-navigation/bottom-tabs';
-import {
-  DrawerContentComponentProps,
-  createDrawerNavigator,
-} from '@react-navigation/drawer';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {
-  ClubListScreen,
-  HomeScreen,
-  EventListScreen,
-} from 'screens/HomeStackScreens';
-import NotificationScreen from 'screens/DrawerNavigatorScreens/NotificationScreen';
-import {
-  TeachersListScreen,
+  DepartmentListScreen,
+  DeptScreen,
   NoticeScreen,
   OfficeListScreen,
   ResourceScreen,
-  DeptScreen,
-  DepartmentListScreen,
   StudentsListScreen,
+  TeachersListScreen,
 } from 'screens/DeptStackScreens';
+import NotificationScreen from 'screens/DrawerNavigatorScreens/NotificationScreen';
+import { ClubListScreen, EventListScreen, HomeScreen } from 'screens/HomeStackScreens';
+import { useTypedSelector } from 'store/store';
+import { theme } from 'utils/theme';
 
-import {SearchListScreen, SearchScreen} from 'screens/SearchStackScreens';
+import { SearchListScreen, SearchScreen } from 'screens/SearchStackScreens';
 
-import {
-  ProfileSettingsScreen,
-  ProfileScreen,
-} from 'screens/ProfileStackScreens';
-import IndividualDetailsScreen from 'screens/DrawerNavigatorScreens/IndividualDetailsScreen';
-import useResponsiveSize from 'hooks/useResponsiveSize';
 import CustomIcon from 'components/CustomIcon';
+import useResponsiveSize from 'hooks/useResponsiveSize';
+import IndividualDetailsScreen from 'screens/DrawerNavigatorScreens/IndividualDetailsScreen';
+import { ProfileScreen, ProfileSettingsScreen } from 'screens/ProfileStackScreens';
 
-import {
-  ForgotPasswordScreen,
-  SignUpScreen,
-  SignInScreen,
-} from 'screens/AuthStackScreens';
+import { ForgotPasswordScreen, SignInScreen, SignUpScreen } from 'screens/AuthStackScreens';
 
+import { CustomButton } from 'ui/CustomButton';
+import { CustomText } from 'ui/CustomText';
 import {
   AuthStackParamList,
   BottomTabParamList,
@@ -51,8 +36,6 @@ import {
   ProfileStackParamList,
   SearchStackParamList,
 } from './types';
-import {CustomButton} from 'ui/CustomButton';
-import {CustomText} from 'ui/CustomText';
 
 const AuthStack = createNativeStackNavigator<AuthStackParamList>();
 const Drawer = createDrawerNavigator<DrawerParamList>();
@@ -67,13 +50,11 @@ export const AuthScreenStack = () => {
     <AuthStack.Navigator
       screenOptions={{
         headerShown: false,
-      }}>
+      }}
+    >
       <AuthStack.Screen name="SignIn" component={SignInScreen} />
       <AuthStack.Screen name="SignUp" component={SignUpScreen} />
-      <AuthStack.Screen
-        name="ForgotPassword"
-        component={ForgotPasswordScreen}
-      />
+      <AuthStack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
     </AuthStack.Navigator>
   );
 };
@@ -92,10 +73,7 @@ const DeptScreenStack = () => {
   return (
     <DeptStack.Navigator>
       <DeptStack.Screen name="Department" component={DeptScreen} />
-      <DeptStack.Screen
-        name="DepartmentList"
-        component={DepartmentListScreen}
-      />
+      <DeptStack.Screen name="DepartmentList" component={DepartmentListScreen} />
       <DeptStack.Screen name="TeacherList" component={TeachersListScreen} />
       <DeptStack.Screen name="StudentsList" component={StudentsListScreen} />
       <DeptStack.Screen name="Resource" component={ResourceScreen} />
@@ -118,10 +96,7 @@ const ProfileScreenStack = () => {
   return (
     <ProfileStack.Navigator>
       <ProfileStack.Screen name="Profile" component={ProfileScreen} />
-      <ProfileStack.Screen
-        name="ProfileSettings"
-        component={ProfileSettingsScreen}
-      />
+      <ProfileStack.Screen name="ProfileSettings" component={ProfileSettingsScreen} />
     </ProfileStack.Navigator>
   );
 };
@@ -136,8 +111,8 @@ interface BottomTabInterface {
 type BottomTabDataInterface = BottomTabInterface[];
 
 const BottomTabData: BottomTabDataInterface = [
-  {label: 'Home', name: 'HomeStack', component: HomeScreenStack, icon: 'day'},
-  {label: 'Dept', name: 'DeptStack', component: DeptScreenStack, icon: 'night'},
+  { label: 'Home', name: 'HomeStack', component: HomeScreenStack, icon: 'day' },
+  { label: 'Dept', name: 'DeptStack', component: DeptScreenStack, icon: 'night' },
   {
     label: 'Search',
     name: 'SearchStack',
@@ -152,9 +127,9 @@ const BottomTabData: BottomTabDataInterface = [
   },
 ];
 
-function MyTabBar({state, descriptors, navigation}: BottomTabBarProps) {
-  const {Rp} = useResponsiveSize();
-  const currentTheme = useTypedSelector(state => state.theme.currentTheme);
+function MyTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
+  const { Rp } = useResponsiveSize();
+  const currentTheme = useTypedSelector((state) => state.theme.currentTheme);
   return (
     <View
       style={{
@@ -167,12 +142,13 @@ function MyTabBar({state, descriptors, navigation}: BottomTabBarProps) {
         borderTopRightRadius: Rp(40),
         shadowColor: 'black',
         shadowOpacity: 0.15,
-        shadowOffset: {width: 0.15, height: 0.15},
+        shadowOffset: { width: 0.15, height: 0.15 },
         shadowRadius: 10,
         elevation: 10,
-      }}>
+      }}
+    >
       {state.routes.map((route, index) => {
-        const {options} = descriptors[route.key];
+        const { options } = descriptors[route.key];
         const TabBarIcon = options.tabBarIcon;
         const ButtonComp = options.tabBarButton;
         console.log('Options is =>', options);
@@ -194,7 +170,7 @@ function MyTabBar({state, descriptors, navigation}: BottomTabBarProps) {
 
           if (!isFocused && !event.defaultPrevented) {
             // The `merge: true` option makes sure that the params inside the tab screen are preserved
-            navigation.navigate(route.name, {merge: true});
+            navigation.navigate(route.name, { merge: true });
           }
         };
 
@@ -209,7 +185,7 @@ function MyTabBar({state, descriptors, navigation}: BottomTabBarProps) {
           <TouchableOpacity
             key={index}
             accessibilityRole="button"
-            accessibilityState={isFocused ? {selected: true} : {}}
+            accessibilityState={isFocused ? { selected: true } : {}}
             accessibilityLabel={options.tabBarAccessibilityLabel}
             testID={options.tabBarTestID}
             onPress={onPress}
@@ -218,7 +194,8 @@ function MyTabBar({state, descriptors, navigation}: BottomTabBarProps) {
               flex: 1,
               justifyContent: 'center',
               alignItems: 'center',
-            }}>
+            }}
+          >
             {TabBarIcon && (
               <TabBarIcon
                 focused={isFocused}
@@ -237,7 +214,8 @@ function MyTabBar({state, descriptors, navigation}: BottomTabBarProps) {
                   : theme[currentTheme].brand.secondary.normal,
 
                 fontWeight: '500',
-              }}>
+              }}
+            >
               {typeof label === 'function'
                 ? label({
                     focused: isFocused,
@@ -264,7 +242,8 @@ const Tab = () => {
         headerShown: false,
         tabBarStyle: {},
       }}
-      tabBar={props => <MyTabBar {...props} />}>
+      tabBar={(props) => <MyTabBar {...props} />}
+    >
       {BottomTabData.map((item, index) => {
         return (
           <BottomTab.Screen
@@ -272,12 +251,8 @@ const Tab = () => {
             options={{
               tabBarShowLabel: false,
               tabBarLabel: item.label,
-              tabBarIcon: props => (
-                <CustomIcon
-                  name={item.icon}
-                  color={props.color}
-                  size={props.size}
-                />
+              tabBarIcon: (props) => (
+                <CustomIcon name={item.icon} color={props.color} size={props.size} />
               ),
             }}
             name={item.name}
@@ -302,13 +277,9 @@ const DrawerData = [
   },
 ];
 
-const MyDrawer = ({
-  state,
-  navigation,
-  descriptors,
-}: DrawerContentComponentProps) => {
+const MyDrawer = ({ state, navigation, descriptors }: DrawerContentComponentProps) => {
   return (
-    <SafeAreaView style={{backgroundColor: '', flex: 1}}>
+    <SafeAreaView style={{ backgroundColor: '', flex: 1 }}>
       {DrawerData.map((item, index) => {
         return (
           // <TouchableOpacity
@@ -322,7 +293,8 @@ const MyDrawer = ({
             variant="tertiary"
             key={index}
             onPress={() => navigation.navigate(item.route)}
-            activeOpacity={0.9}>
+            activeOpacity={0.9}
+          >
             <CustomText variant="smallText">{item.label}</CustomText>
           </CustomButton>
         );
@@ -337,13 +309,11 @@ export const RootDrawer = () => {
       screenOptions={{
         headerShown: false,
       }}
-      drawerContent={props => <MyDrawer {...props} />}>
+      drawerContent={(props) => <MyDrawer {...props} />}
+    >
       <Drawer.Screen name="Main" component={Tab} />
       <Drawer.Screen name="Notification" component={NotificationScreen} />
-      <Drawer.Screen
-        name="IndividualDetails"
-        component={IndividualDetailsScreen}
-      />
+      <Drawer.Screen name="IndividualDetails" component={IndividualDetailsScreen} />
     </Drawer.Navigator>
   );
 };

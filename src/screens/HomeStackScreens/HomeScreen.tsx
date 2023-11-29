@@ -1,32 +1,33 @@
-import React, {useState} from 'react';
-import {View} from 'react-native';
-import {HomeScreenProps} from 'navigation/types';
-import DropDownPicker from 'react-native-dropdown-picker';
-import useResponsiveSize from 'hooks/useResponsiveSize';
-import {useTypedSelector} from 'store/store';
-import {theme} from 'utils/theme';
-import {FONTSIZE} from 'utils/fontSize';
-import ScreenLayout from 'screens/ScreenLayout';
-import {CustomText} from 'ui/CustomText';
 import CheckBox from '@react-native-community/checkbox';
+import CustomIcon from 'components/CustomIcon';
+import useResponsiveSize from 'hooks/useResponsiveSize';
+import { HomeScreenProps } from 'navigation/types';
+import React, { useState } from 'react';
+import { View } from 'react-native';
+import DropDownPicker from 'react-native-dropdown-picker';
+import ScreenLayout from 'screens/ScreenLayout';
+import { useTypedSelector } from 'store/store';
+import { CustomText } from 'ui/CustomText';
+import { FONTSIZE } from 'utils/fontSize';
+import { theme } from 'utils/theme';
 
-export const HomeScreen = ({route, navigation}: HomeScreenProps) => {
+export const HomeScreen = ({ route, navigation }: HomeScreenProps) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  const {Rp} = useResponsiveSize();
-  const currentTheme = useTypedSelector(state => state.theme.currentTheme);
+  const { Rp } = useResponsiveSize();
+  const currentTheme = useTypedSelector((state) => state.theme.currentTheme);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([
-    {label: 'Applied Mathematics', value: 'am'},
-    {label: 'EEE', value: 'eee'},
-    {label: 'CSTE', value: 'cste'},
-    {label: 'ICE', value: 'ice'},
+    { label: 'Applied Mathematics', value: 'am' },
+    { label: 'EEE', value: 'eee' },
+    { label: 'CSTE', value: 'cste' },
+    { label: 'ICE', value: 'ice' },
   ]);
   return (
     <ScreenLayout>
-      <View style={{width: Rp(900), alignSelf: 'center'}}>
+      <View style={{ width: Rp(900), alignSelf: 'center' }}>
         <DropDownPicker
-          style={{backgroundColor: theme[currentTheme].base.tertiary.normal}}
+          style={{ backgroundColor: theme[currentTheme].base.tertiary.normal }}
           searchContainerStyle={{
             backgroundColor: theme[currentTheme].base.tertiary.dark,
           }}
@@ -43,9 +44,9 @@ export const HomeScreen = ({route, navigation}: HomeScreenProps) => {
           listItemContainerStyle={{
             backgroundColor: theme[currentTheme].base.tertiary.normal,
           }}
-          listItemLabelStyle={{color: 'blue'}}
-          itemSeparatorStyle={{backgroundColor: 'green'}}
-          selectedItemContainerStyle={{backgroundColor: 'pink'}}
+          listItemLabelStyle={{ color: 'blue' }}
+          itemSeparatorStyle={{ backgroundColor: 'green' }}
+          selectedItemContainerStyle={{ backgroundColor: 'pink' }}
           searchable
           placeholder="Select Department"
           mode="BADGE"
@@ -65,16 +66,18 @@ export const HomeScreen = ({route, navigation}: HomeScreenProps) => {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between',
-          }}>
+          }}
+        >
           <CustomText variant="regularText">This is Custom Text</CustomText>
           <CheckBox
             disabled={false}
             value={toggleCheckBox}
             tintColor="red"
             onTintColor="blue"
-            tintColors={{true: 'green', false: 'red'}}
-            onValueChange={newValue => setToggleCheckBox(newValue)}
+            tintColors={{ true: 'green', false: 'red' }}
+            onValueChange={(newValue) => setToggleCheckBox(newValue)}
           />
+          <CustomIcon name="day" />
         </View>
       </View>
     </ScreenLayout>

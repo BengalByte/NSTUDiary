@@ -1,12 +1,12 @@
-import {configureStore, createSlice} from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import colorSlice from './slices/ColorSlice';
 // import RootState from './store.types';
-import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
-import themeSlice from './slices/ThemeSlice';
 import usersApi from 'api/users';
-import usersSlice from './slices/UsersSlice';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import postsSlice from './slices/PostsSlice';
+import themeSlice from './slices/ThemeSlice';
 import tokenSlice from './slices/TokenSlice';
+import usersSlice from './slices/UsersSlice';
 
 const store = configureStore({
   reducer: {
@@ -17,8 +17,7 @@ const store = configureStore({
     token: tokenSlice,
     [usersApi.reducerPath]: usersApi.reducer,
   },
-  middleware: getDefaultMiddleware =>
-    getDefaultMiddleware().concat(usersApi.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(usersApi.middleware),
 });
 
 export default store;

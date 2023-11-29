@@ -1,12 +1,12 @@
-import {View, Text, TouchableOpacity} from 'react-native';
-import React from 'react';
-import {NotificationScreenProps} from 'navigation/types';
-import {CustomText} from 'ui/CustomText';
 import CustomIcon from 'components/CustomIcon';
-import {CustomTextInput} from 'ui/CustomTextInput';
-import {CustomButton} from 'ui/CustomButton';
+import { NotificationScreenProps } from 'navigation/types';
+import React from 'react';
+import { Text, View } from 'react-native';
+import { CustomButton } from 'ui/CustomButton';
+import { CustomText } from 'ui/CustomText';
+import { CustomTextInput } from 'ui/CustomTextInput';
 
-const NotificationScreen = ({route, navigation}: NotificationScreenProps) => {
+const NotificationScreen = ({ route, navigation }: NotificationScreenProps) => {
   return (
     <View>
       <CustomText variant="bigTitle">This is Custom Text</CustomText>
@@ -19,7 +19,7 @@ const NotificationScreen = ({route, navigation}: NotificationScreenProps) => {
         label="Username"
         placeholder="Enter your username"
         icon={true}
-        containerStyle={{marginBottom: 20, padding: 20}}
+        containerStyle={{ marginBottom: 20, padding: 20 }}
       />
       <CustomTextInput
         variant="primary"
@@ -29,7 +29,7 @@ const NotificationScreen = ({route, navigation}: NotificationScreenProps) => {
         iconPosition="right"
         icon={true}
         onChangeText={() => {}}
-        containerStyle={{marginBottom: 20, padding: 20}}
+        containerStyle={{ marginBottom: 20, padding: 20 }}
       />
 
       <CustomButton variant="primary">
@@ -44,7 +44,8 @@ const NotificationScreen = ({route, navigation}: NotificationScreenProps) => {
           backgroundColor: 'tomato',
           padding: 10,
           alignSelf: 'flex-start',
-        }}>
+        }}
+      >
         <Text>This is Text</Text>
       </View>
     </View>
